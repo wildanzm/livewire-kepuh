@@ -21,6 +21,6 @@ class RequestStatusSeeder extends Seeder
             ['name' => 'Completed']
         ];
 
-        RequestStatus::create($requestStatus);
+        RequestStatus::insert($requestStatus);
     }
 }
