@@ -19,24 +19,20 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        <livewire:layout.navigation />
 
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class="bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
+    {{-- Navbar --}}
+    <x-admin-header />
+    <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+        {{-- Sidebar --}}
+        <x-admin-sidebar />
 
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
+        {{-- Main --}}
+        <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
+            <main>
+                {{-- {{ $slot }} --}}
+            </main>
+        </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     <script src="{{ asset('/js/dark-mode.js') }}"></script>
 </body>
