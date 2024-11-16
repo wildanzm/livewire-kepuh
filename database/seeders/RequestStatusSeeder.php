@@ -14,11 +14,11 @@ class RequestStatusSeeder extends Seeder
     public function run(): void
     {
         $requestStatus = [
-            ['name' => 'Waiting'],
-            ['name' => 'Aprroved'],
-            ['name' => 'Rejected'],
-            ['name' => 'Progress'],
-            ['name' => 'Completed']
+            ['status' => 'Waiting'],
+            ['status' => 'Aprroved'],
+            ['status' => 'Rejected'],
+            ['status' => 'Progress'],
+            ['status' => 'Completed']
         ];
 
         RequestStatus::insert($requestStatus);

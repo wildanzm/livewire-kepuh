@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constraint();
+            $table->foreignId('request_statuses_id')->constraint();
+            $table->foreignId('request_types_id')->constraint();
+            $table->string('image_ktp');
+            $table->string('image_kk');
+            $table->string('image_selfie');
             $table->timestamps();
         });
     }
