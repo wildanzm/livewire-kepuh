@@ -13,9 +13,8 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
+     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <wireui:scripts />
-    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
 <body class="font-sans antialiased">
@@ -37,7 +36,7 @@
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+     @livewireScripts
     <script src="{{ asset('/js/dark-mode.js') }}"></script>
 </body>
 

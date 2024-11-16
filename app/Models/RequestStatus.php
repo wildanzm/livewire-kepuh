@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class RequestStatus extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['status'];
 }
