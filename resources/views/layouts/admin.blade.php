@@ -17,6 +17,7 @@
 
     <!-- Scripts -->
     @livewireStyles
+    <wireui:scripts />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -39,7 +40,7 @@
                         </svg>
                     </button>
                     <a href="https://flowbite.com" class="flex ms-2 md:me-24">
-                        <img src="{{asset('assets/images/logo.png')}}" class="h-8 me-3" alt="FlowBite Logo" />
+                        <img src="{{ asset('assets/images/logo.png') }}" class="h-8 me-3" alt="FlowBite Logo" />
                         <span class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-white">Desa
                             Kepuh</span>
                     </a>
@@ -60,11 +61,15 @@
 
         <div id="main-content" class="relative w-full h-screen overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
             <main>
-                @yield('content')
+                {{-- @yield('content') --}}
+                {{ $slot }}
             </main>
         </div>
     </div>
+
     
+    <x-dialog z-index="z-50" blur="md" align="center" />
+    @wireUiScripts
     @livewireScripts
     <script src="{{ asset('js/dark-mode.js') }}"></script>
 </body>
