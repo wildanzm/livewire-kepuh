@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('request_status_id')->constrained();
-            $table->foreignId('type_letter_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('request_status_id')->constrained()->onDelete('cascade');
+            $table->foreignId('type_letter_id')->constrained()->onDelete('cascade');
             $table->string('image_ktp');
             $table->string('image_selfie');
             $table->timestamps();
