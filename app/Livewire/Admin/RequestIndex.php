@@ -19,6 +19,10 @@ class RequestIndex extends Component
     public $isModalOpen = false;
     public $modalImage;
 
+    public $domicileLetter;
+    public $isModalOpenpdf = false; // Properti untuk modal
+
+
     public function confirmApprove($id)
     {
         $this->dialog()->confirm([

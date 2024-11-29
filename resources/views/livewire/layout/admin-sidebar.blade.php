@@ -8,7 +8,7 @@ new class extends Component {
 
 
 <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-    <ul class="space-y-2 font-medium">    
+    <ul class="space-y-2 font-medium">
         <li>
             <a href="#"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -43,52 +43,62 @@ new class extends Component {
             <ul id="dropdown-layouts" class="hidden py-2 space-y-2">
                 <li>
                     <a href=""
-                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat Keterangan Tidak Mampu</a>
+                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
+                        Keterangan Tidak Mampu</a>
                 </li>
                 <li>
                     <a href=""
-                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat Pindah</a>
+                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
+                        Pindah</a>
                 </li>
                 <li>
-                    <a href="{{ route('request.letter') }}"
+                    <a href="{{ route('admin.domicile-letter') }}"
                         class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
                         Surat Domisili
                     </a>
                 </li>
                 <li>
                     <a href=""
-                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat Keterangan Usaha</a>
+                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
+                        Keterangan Usaha</a>
                 </li>
                 <li>
                     <a href=""
-                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Akta Kelahiran</a>
+                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Akta
+                        Kelahiran</a>
                 </li>
                 <li>
                     <a href=""
-                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat Desa</a>
+                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
+                        Desa</a>
                 </li>
                 <li>
                     <a href=""
-                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat Keterangan Tidak Mampu</a>
+                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
+                        Keterangan Tidak Mampu</a>
                 </li>
                 <li>
                     <a href=""
-                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat Pendapatan</a>
+                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
+                        Pendapatan</a>
                 </li>
                 <li>
                     <a href=""
-                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat Keterangan Belum Menikah</a>
+                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
+                        Keterangan Belum Menikah</a>
                 </li>
                 <li>
                     <a href=""
-                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat Pernikahan</a>
+                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
+                        Pernikahan</a>
                 </li>
                 <li>
                     <a href=""
-                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat Keterangan Beda Nama</a>
+                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
+                        Keterangan Beda Nama</a>
                 </li>
             </ul>
         </li>
-        
+
     </ul>
 </div>

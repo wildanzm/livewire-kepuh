@@ -178,12 +178,16 @@
                                                         Lihat Surat
                                                     </button>
 
-                                                    <!-- Modal untuk melihat PDF -->
-                                                    {{-- CSS: 'backdrop-blur-sm' --}}
-                                                    <x-modal name="blur-sm" blur="sm" wire:model.defer="isModalOpenpdf">
-                                                        <x-card title="Blur SM">
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                            industry.
+
+                                                    <x-modal name="pdf-preview-modal" wire:model.defer="isModalOpenpdf">
+                                                        <x-card title="Domicile Letter">
+                                                            @if ($domicileLetter)
+                                                                <iframe
+                                                                    src="data:application/pdf;base64,{{ base64_encode($domicileLetter['content']) }}"
+                                                                    class="w-full h-screen" frameborder="0"></iframe>
+                                                            @else
+                                                                <p>Data surat tidak tersedia untuk ditampilkan.</p>
+                                                            @endif
                                                         </x-card>
                                                     </x-modal>
                                                 @else

@@ -1,17 +1,21 @@
 <?php
 
-use App\Livewire\Admin\RequestIndex;
+use App\Models\DomicileLetter;
 
+use App\Livewire\DomicileLetterPdf;
+use App\Livewire\Admin\RequestIndex;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\UserRequestComponent;
+use App\Livewire\Admin\Letter\Domicile;
 use App\Http\Controllers\DashboardController;
-use App\Livewire\DomicileLetterPdf;
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // Route untuk halaman permintaan surat
     Route::get('request-letter', RequestIndex::class)->name('request');
 
-    Route::get('/domicile-letter/{requestId}/preview', DomicileLetterPdf::class)->name('domicile-letterpdf');
+    // Route::get('/domicile-letter/{requestId}/preview', DomicileLetterPdf::class)->name('domicile-letterpdf');
+
+    Route::get('/domicile-letter', Domicile::class)->name('domicile-letter');
 });
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/request-letter', UserRequestComponent::class)->name('request.letter');
