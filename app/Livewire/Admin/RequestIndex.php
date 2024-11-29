@@ -10,13 +10,17 @@ use WireUi\Traits\WireUiActions;
 
 class RequestIndex extends Component
 {
-
     use WireUiActions;
-    #[Layout('layouts.admin')] 
+
+    #[Layout('layouts.admin')]
     #[Title('Permintaan Surat | Desa Kepuh')]
 
-    public function confirmApprove($id){
+    // Properti Modal
+    public $isModalOpen = false;
+    public $modalImage;
 
+    public function confirmApprove($id)
+    {
         $this->dialog()->confirm([
             'title' => 'Apakah anda setuju dengan permintaan ini?',
             'icon' => 'question',
@@ -32,23 +36,21 @@ class RequestIndex extends Component
         ]);
     }
 
-    public function approved($id){
-
+    public function approved($id)
+    {
         $request = Request::find($id);
         $request->update([
             'request_status_id' => 2,
         ]);
-        
+
         $this->dialog()->show([
             'icon' => 'success',
             'title' => 'Berhasil Disetujui',
         ]);
-        
     }
 
     public function confirmReject($id)
     {
-
         $this->dialog()->confirm([
             'title' => 'Apakah anda menolak permintaan ini?',
             'icon' => 'question',
@@ -64,22 +66,21 @@ class RequestIndex extends Component
         ]);
     }
 
-    public function rejected($id){
-
+    public function rejected($id)
+    {
         $request = Request::find($id);
         $request->update([
             'request_status_id' => 3,
         ]);
-        
+
         $this->dialog()->show([
             'icon' => 'success',
             'title' => 'Berhasil Ditolak',
         ]);
-        
     }
 
-    public function confirmProcess($id){
-
+    public function confirmProcess($id)
+    {
         $this->dialog()->confirm([
             'title' => 'Apakah anda ingin memproses permintaan ini?',
             'icon' => 'question',
@@ -95,21 +96,21 @@ class RequestIndex extends Component
         ]);
     }
 
-    public function processed($id){
-
+    public function processed($id)
+    {
         $request = Request::find($id);
         $request->update([
             'request_status_id' => 4,
         ]);
-        
+
         $this->dialog()->show([
             'icon' => 'success',
             'title' => 'Berhasil Diproses',
         ]);
-        
     }
 
-    public function confirmComplete($id) {
+    public function confirmComplete($id)
+    {
         $this->dialog()->confirm([
             'title' => 'Apakah permintaan ini telah selesai?',
             'icon' => 'question',
@@ -125,21 +126,32 @@ class RequestIndex extends Component
         ]);
     }
 
-    public function completed($id){
-
+    public function completed($id)
+    {
         $request = Request::find($id);
         $request->update([
             'request_status_id' => 5,
         ]);
-        
+
         $this->dialog()->show([
             'icon' => 'success',
             'title' => 'Surat Telah Selesai Dibuat',
         ]);
-        
     }
 
 
+    // Open Modal with the image passed as parameter
+    public function openModal($imageUrl)
+    {
+        $this->modalImage = $imageUrl; // Set image URL
+        $this->isModalOpen = true;    // Open modal
+    }
+
+    public function closeModal()
+    {
+        $this->isModalOpen = false; // Close modal
+
+    }
     public function render()
     {
         return view('livewire.admin.request-index', [

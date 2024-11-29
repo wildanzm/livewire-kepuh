@@ -87,14 +87,30 @@
                                         class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $request->typeLetter->name }}
                                     </td>
+                                    <!-- Thumbnail Images -->
+                                    <!-- Thumbnail Images -->
                                     <td
                                         class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $request->image_ktp }}
+                                        <!-- Thumbnail for KTP -->
+                                        <img src="{{ Storage::url($request->image_ktp) }}" alt="KTP Image"
+                                            class="h-24 w-auto rounded-md cursor-pointer"
+                                            wire:click="openModal('{{ Storage::url($request->image_ktp) }}')" />
                                     </td>
+
                                     <td
                                         class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $request->image_selfie }}
+                                        <!-- Thumbnail for Selfie -->
+                                        <img src="{{ Storage::url($request->image_selfie) }}" alt="Selfie Image"
+                                            class="h-24 w-auto rounded-md cursor-pointer"
+                                            wire:click="openModal('{{ Storage::url($request->image_selfie) }}')" />
                                     </td>
+
+
+
+
+
+
+
                                     <td
                                         class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
                                         @switch($request->request_status_id)
@@ -128,8 +144,7 @@
                                     <td class="p-4 space-x-2 whitespace-nowrap">
                                         @switch($request->request_status_id)
                                             @case(1)
-                                                <button type="button"
-                                                    wire:click="confirmApprove({{ $request->id }})"
+                                                <button type="button" wire:click="confirmApprove({{ $request->id }})"
                                                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                                     Setujui
                                                 </button>
@@ -150,9 +165,35 @@
                                             @break
 
                                             @case(4)
+                                                <!-- Tombol Selesai -->
                                                 <button type="button" wire:click="confirmComplete({{ $request->id }})"
                                                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                                     Selesai
+                                                </button>
+
+                                                @if ($request->domicileLetter)
+                                                    <!-- Tombol untuk menampilkan modal -->
+                                                    <button type="button" wire:click="showPdfModalPDF"
+                                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
+                                                        Lihat Surat
+                                                    </button>
+
+                                                    <!-- Modal untuk melihat PDF -->
+                                                    {{-- CSS: 'backdrop-blur-sm' --}}
+                                                    <x-modal name="blur-sm" blur="sm" wire:model.defer="isModalOpenpdf">
+                                                        <x-card title="Blur SM">
+                                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                            industry.
+                                                        </x-card>
+                                                    </x-modal>
+                                                @else
+                                                    <p>Data surat tidak tersedia.</p>
+                                                @endif
+
+                                                <!-- Tombol Download PDF -->
+                                                <button type="button" wire:click="downloadPdf"
+                                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:ring-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-green-800">
+                                                    Download PDF
                                                 </button>
                                             @break
 
@@ -163,6 +204,18 @@
                                 </tr>
                                 @empty
                                 @endforelse
+                                <!-- Modal -->
+                                <x-modal name="image-preview-modal" wire:model.defer="isModalOpen" blur='sm'>
+                                    <x-card title="Image Preview">
+                                        @if ($modalImage)
+                                            <img src="{{ $modalImage }}" alt="Image Preview"
+                                                class="max-h-screen max-w-full rounded-md" />
+                                        @else
+                                            <p class="text-gray-500">No image to preview</p>
+                                        @endif
+                                    </x-card>
+                                </x-modal>
+
 
                             </tbody>
                         </table>
