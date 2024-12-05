@@ -9,6 +9,7 @@ class SingleStatusLetter extends Model
 {
     protected $fillable = [
         'request_id',
+        'number_letter',
         'name',
         'nik',
         'birth_place',

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('village_letters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('request_id')->constrained();
+            $table->string('number_letter')->nullable();
             $table->string('sppt_number');
             $table->string('persil_number');
             $table->string('kohir_number');

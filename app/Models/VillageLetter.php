@@ -9,6 +9,7 @@ class VillageLetter extends Model
 {
     protected $fillable = [
         'request_id',
+        'number_letter',
         'sppt_number',
         'persil_number',
         'kohir_number',

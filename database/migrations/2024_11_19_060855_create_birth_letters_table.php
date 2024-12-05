@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('birth_letters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('request_id')->constrained();
+            $table->string('number_letter')->nullable();
             $table->string('family_head_name');
             $table->string('family_card_number');
             $table->string('baby_name');
