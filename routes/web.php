@@ -11,6 +11,8 @@ use App\Livewire\UserRequestComponent;
 use App\Livewire\Admin\Letter\Domicile;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\Letter\EditPoverty;
+use App\Livewire\Index;
+
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // Route untuk halaman permintaan surat
@@ -36,8 +38,9 @@ Route::middleware(['auth'])->get('/dashboard', function () {
     return redirect()->route('user.dashboard');
 })->name('dashboard');
 
+Route::get('/', Index::class)->name('index');
 
-Route::view('/', 'welcome')->name('welcome');
+// Route::view('/', 'welcome')->name('welcome');
 
 // Route::view('dashboard', 'dashboard')
 //     ->middleware(['auth', 'verified'])

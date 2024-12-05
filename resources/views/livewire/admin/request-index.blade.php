@@ -172,6 +172,43 @@
                                                 </button>
                                             @break
 
+                                            @case(4)
+                                                <!-- Tombol Selesai -->
+                                                <button type="button" wire:click="confirmComplete({{ $request->id }})"
+                                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                                    Selesai
+                                                </button>
+
+                                                @if ($request->domicileLetter)
+                                                    <!-- Tombol untuk menampilkan modal -->
+                                                    <button type="button" wire:click="showPdfModalPDF"
+                                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
+                                                        Lihat Surat
+                                                    </button>
+
+
+                                                    <x-modal name="pdf-preview-modal" wire:model.defer="isModalOpenpdf">
+                                                        <x-card title="Domicile Letter">
+                                                            @if ($domicileLetter)
+                                                                <iframe
+                                                                    src="data:application/pdf;base64,{{ base64_encode($domicileLetter['content']) }}"
+                                                                    class="w-full h-screen" frameborder="0"></iframe>
+                                                            @else
+                                                                <p>Data surat tidak tersedia untuk ditampilkan.</p>
+                                                            @endif
+                                                        </x-card>
+                                                    </x-modal>
+                                                @else
+                                                    <p>Data surat tidak tersedia.</p>
+                                                @endif
+
+                                                <!-- Tombol Download PDF -->
+                                                <button type="button" wire:click="downloadPdf"
+                                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:ring-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-green-800">
+                                                    Download PDF
+                                                </button>
+                                            @break
+
                                             @case(5)
                                             @break
                                         @endswitch
