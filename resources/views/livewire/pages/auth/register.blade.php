@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Component 
+new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Component
 {
     public string $name = '';
     public string $email = '';
@@ -41,13 +41,18 @@ new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Com
 }; ?>
 
 <div>
+
+    <div>
+        <h1 class="font-bold text-3xl text-slate-800">Register</h1>
+        <p class="mb-3 mt-1 text-sm font-semibold">Silahkan Daftar Terlebih Dahulu</p>
+    </div>
     <form wire:submit="register">
         @csrf
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Nama')" />
             <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required
-                autofocus autocomplete="name" />
+                autofocus autocomplete="name" placeholder="John Doe" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
@@ -55,7 +60,7 @@ new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Com
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email"
-                required autocomplete="username" />
+                required autocomplete="username" placeholder="johndoe@gmail.com" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -64,7 +69,7 @@ new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Com
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input wire:model="password" id="password" class="block mt-1 w-full" type="password" name="password"
-                required autocomplete="new-password" />
+                required autocomplete="new-password" placeholder="********" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -74,7 +79,7 @@ new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Com
             <x-input-label for="password_confirmation" :value="__('Konfirmasi Password')" />
 
             <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                type="password" name="password_confirmation" required autocomplete="new-password" />
+                type="password" name="password_confirmation" required autocomplete="new-password" placeholder="********" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
@@ -85,9 +90,9 @@ new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Com
                 {{ __('Sudah punya akun?') }}
             </a>
 
-            <x-primary-button class="ms-4">
-                {{ __('Daftar') }}
-            </x-primary-button>
         </div>
+        <x-primary-button class="my-3">
+            {{ __('Daftar') }}
+        </x-primary-button>
     </form>
 </div>
