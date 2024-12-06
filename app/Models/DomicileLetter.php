@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DomicileLetter extends Model
 {
-    protected $fillable =[
+    protected $fillable = [
         'request_id',
         'nik',
         'name',

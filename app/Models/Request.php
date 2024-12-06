@@ -33,7 +33,7 @@ class Request extends Model
 
     public function domicileLetter(): HasOne
     {
-        return $this->hasOne(DomicileLetter::class);
+        return $this->hasOne(DomicileLetter::class, 'request_id');
     }
 
     public function businessLetter(): HasOne
@@ -53,7 +53,7 @@ class Request extends Model
 
     public function povertyLetter(): HasOne
     {
-        return $this->hasOne(PovertyLetter::class);
+        return $this->hasOne(PovertyLetter::class, 'request_id');
     }
 
     public function incomeLetter(): HasOne

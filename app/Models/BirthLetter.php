@@ -9,6 +9,7 @@ class BirthLetter extends Model
 {
     protected $fillable = [
         'request_id',
+        'number_letter',
         'family_head_name',
         'family_card_number',
         'baby_name',
@@ -55,7 +56,8 @@ class BirthLetter extends Model
         'witness2_address',
     ];
 
-    public function request(): BelongsTo{
+    public function request(): BelongsTo
+    {
         return $this->belongsTo(Request::class);
     }
 }

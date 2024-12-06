@@ -9,6 +9,7 @@ class BusinessLetter extends Model
 {
     protected $fillable = [
         'request_id',
+        'number_letter',
         'nik',
         'name',
         'birth_place',
@@ -23,7 +24,8 @@ class BusinessLetter extends Model
         'business_address',
     ];
 
-    public function request(): BelongsTo{
+    public function request(): BelongsTo
+    {
         return $this->belongsTo(Request::class);
     }
 }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('single_status_letters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('request_id')->constrained();
+            $table->string('number_letter')->nullable();
             $table->string('name');
             $table->string('nik');
             $table->string('birth_place');

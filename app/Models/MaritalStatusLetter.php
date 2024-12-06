@@ -9,6 +9,7 @@ class MaritalStatusLetter extends Model
 {
     protected $fillable = [
         'request_id',
+        'number_letter',
         'name',
         'birth_place',
         'birth_date',

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('poverty_letters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('request_id')->constrained();
+            $table->string('number_letter')->nullable();
             $table->string('name');
             $table->string('nik');
             $table->enum('gender', ['Laki-Laki', 'Perempuan']);
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('religion');
             $table->string('occupation');
             $table->text('address');
+            $table->string('purpose');
             $table->timestamps();
         });
     }

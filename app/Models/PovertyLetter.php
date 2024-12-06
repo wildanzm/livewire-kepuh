@@ -17,6 +17,8 @@ class PovertyLetter extends Model
         'nationality',
         'religion',
         'occupation',
+        'purpose',
+        'number_letter',
         'address'
     ];
 
