@@ -9,8 +9,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Component
-{
+new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Component {
     public string $name = '';
     public string $email = '';
     public string $password = '';
@@ -35,7 +34,7 @@ new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Com
         if (auth()->user()->hasRole('admin')) {
             $this->redirect(route('admin.request', absolute: false), navigate: true);
         } elseif (auth()->user()->hasRole('user')) {
-            $this->redirect(route('welcome', absolute: false), navigate: true);
+            $this->redirect(route('index', absolute: false), navigate: true);
         }
     }
 }; ?>
@@ -52,7 +51,7 @@ new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Com
         <div>
             <x-input-label for="name" :value="__('Nama')" />
             <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required
-                autofocus autocomplete="name" placeholder="John Doe" />
+                autofocus autocomplete="name" placeholder="Masukan Nama" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
@@ -60,7 +59,7 @@ new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Com
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email"
-                required autocomplete="username" placeholder="johndoe@gmail.com" />
+                required autocomplete="username" placeholder="Masukan Email" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -69,7 +68,7 @@ new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Com
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input wire:model="password" id="password" class="block mt-1 w-full" type="password" name="password"
-                required autocomplete="new-password" placeholder="********" />
+                required autocomplete="new-password" placeholder="Masukan Password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -79,7 +78,8 @@ new #[Layout('layouts.guest')] #[Title('Daftar | Desa Kepuh')] class extends Com
             <x-input-label for="password_confirmation" :value="__('Konfirmasi Password')" />
 
             <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                type="password" name="password_confirmation" required autocomplete="new-password" placeholder="********" />
+                type="password" name="password_confirmation" required autocomplete="new-password"
+                placeholder="Konfirmasi Password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>

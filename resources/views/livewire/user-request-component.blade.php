@@ -1,4 +1,4 @@
-<div class="max-w-4xl mx-auto mt-10 py-6">
+<div class="max-w-4xl mx-auto mt-24 py-6 bg-white shadow-xl p-8 my-10 rounded-xl">
     <h1 class="text-2xl font-bold mb-5">Ajukan Permintaan Surat</h1>
 
     <!-- Form Pengajuan Surat -->

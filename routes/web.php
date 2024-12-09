@@ -3,20 +3,22 @@
 
 
 use App\Http\Controllers\Admin\DomicileController;
+use App\Livewire\Admin\AdminRequestComponent;
 use App\Livewire\Admin\Letter\Poverty;
 use App\Livewire\DomicileLetterPdf;
 use App\Livewire\Admin\RequestIndex;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\UserRequestComponent;
+use App\Livewire\Admin\UserRequestComponent;
 use App\Livewire\Admin\Letter\Domicile;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\Letter\EditPoverty;
 use App\Livewire\Index;
-
+use App\Livewire\User\RequestDashboard;
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // Route untuk halaman permintaan surat
-    Route::get('request-letter', RequestIndex::class)->name('request');
+    Route::get('request', RequestIndex::class)->name('request');
+    Route::get('request-letter', AdminRequestComponent::class)->name('request.letter');
 
     Route::get('/domicile-letter/{id}/download', [Domicile::class, 'downloadPDF'])->name('domicile-letter.download');
     Route::get('/poverty-letter/{id}/download', [Poverty::class, 'downloadPDF'])->name('poverty-letter.download');
@@ -30,13 +32,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
 
 Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/request-letter', UserRequestComponent::class)->name('request.letter');
-    Route::get('/user/dashboard', [DashboardController::class, 'user'])->name('user.dashboard');
+    Route::get('request-letter', UserRequestComponent::class)->name('request.letter');
+    Route::get('dashboard-request', RequestDashboard::class)->name('dashboard.request');
+    // Route::get('/user/dashboard', [DashboardController::class, 'user'])->name('user.dashboard');
 });
 
-Route::middleware(['auth'])->get('/dashboard', function () {
-    return redirect()->route('user.dashboard');
-})->name('dashboard');
+// Route::middleware(['auth'])->get('/dashboard', function () {
+//     return redirect()->route('user.dashboard');
+// })->name('dashboard');
 
 Route::get('/', Index::class)->name('index');
 

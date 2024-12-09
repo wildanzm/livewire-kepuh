@@ -206,7 +206,7 @@
 <!-- Footer -->
 <div class="footer">
     <div class="signature-section">
-        <p class="date">Kepuh, {{ now()->translatedFormat('d F Y') }}</p>
+        <p class="date">Kepuh, {{ now()->translatedFormat('j F Y') }}</p>
         <p class="signature-title">An. Kepala Desa Kepuh</p>
         <p class="signature-name">[Nama Kepala Desa]</p>
         <p class="signature-nip">NIP. [NIP Kepala Desa]</p>

@@ -13,19 +13,19 @@ class TypeLetterSeeder extends Seeder
      */
     public function run(): void
     {
-       $typeLetter = [
-        ['name'=> 'Surat Keterangan Tidak Mampu'],
-        ['name'=> 'Surat Pindah'],
-        ['name'=> 'Surat Domisili'],
-        ['name'=> 'Surat Keterangan Usaha'],
-        ['name'=> 'Akta Kelahiran'],
-        ['name'=> 'Surat Desa'],
-        ['name'=> 'Surat Pendapatan'],
-        ['name'=> 'Surat Keterangan Belum Menikah'],
-        ['name'=> 'Surat Pernikahan'],
+        $typeLetter = [
+            ['name' => 'Surat Keterangan Tidak Mampu'],
+            ['name' => 'Surat Pindah Datang Dalam satu Desa'],
+            ['name' => 'Surat Domisili'],
+            ['name' => 'Surat Keterangan Usaha'],
+            ['name' => 'Akta Kelahiran'],
+            ['name' => 'Surat Desa'],
+            ['name' => 'Surat Pendapatan'],
+            ['name' => 'Surat Keterangan Belum Menikah'],
+            ['name' => 'Surat Pernikahan'],
 
-       ];
+        ];
 
-       TypeLetter::insert($typeLetter);
+        TypeLetter::insert($typeLetter);
     }
 }

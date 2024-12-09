@@ -159,7 +159,7 @@ class RequestIndex extends Component
     public function render()
     {
         return view('livewire.admin.request-index', [
-            'requests' => Request::all(),
+            'requests' => Request::orderBy('created_at', 'desc')->get(),
         ]);
     }
 }

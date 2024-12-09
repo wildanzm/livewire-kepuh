@@ -69,7 +69,7 @@ class Poverty extends Component
     {
 
 
-        // Kirim data ke view
-        return view('pdf.poverty_letter');
+        // Generate konten HTML dari view
+        $htmlContent = view('pdf.poverty_letter');
     }
 }

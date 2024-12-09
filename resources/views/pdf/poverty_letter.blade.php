@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <title>Surat Keterangan Domisili</title>
     <style>
         @media print {
@@ -88,7 +88,8 @@
         .letter-number {
             font-size: 1.1rem;
             text-align: center;
-            padding: 1rem 0;
+            margin-top: -1rem;
+            padding-bottom: 2rem;
         }
 
         .introduction,
@@ -140,8 +141,8 @@
             margin-bottom: 1rem;
             /* mb-4 */
             margin-left: -6rem;
-            margin-right: 0.3rem
-                /* -ml-16 */
+            margin-right: 0.3rem;
+            /* -ml-16 */
         }
 
         .reason {
@@ -161,7 +162,7 @@
             <div class="header-text">
                 <h1 class="government-name">Pemerintah Kabupaten Majalengka</h1>
                 <h2 class="district-name">Kecamatan Lemahsugih</h2>
-                <h2 class="village-name">Desa Kepuh</h2>
+                <h2 class="village-name">Desa Kepuhh</h2>
                 <p class="address"><span>Alamat:</span> Jln Raya Desa Kepuh No 01 Kec. Lemahsugih Kab. Majalengka 45465
                 </p>
             </div>
@@ -172,7 +173,7 @@
     <!-- Content -->
     <div class="content">
         <h3 class="letter-title">Surat Keterangan Tidak Mampu</h3>
-        <p class="letter-number">Nomor: [Nomor Surat]</p>
+        <p class="letter-number">Nomor: {{ $poverty->number_letter }}</p>
         <p class="introduction">Yang bertanda tangan di bawah ini, Kepala Desa Kepuh Kecamatan Lemahsugih Kabupaten
             Majalengka, dengan ini menerangkan bahwa:</p>
         <table class="person-details">
@@ -210,18 +211,15 @@
             </tr>
         </table>
         <p class="domicile-confirmation">Menurut data sepengetahuan kami orang tersebut benar-benar dari Keluarga Yang
-            Tidak
-            Mampu. Dan Surat Ini Di pergunakan Untuk <span class="reason">Pembuatan Kartu BPJS
-                Kesehatan.</span></p>
+            Tidak Mampu. Dan Surat Ini Di pergunakan Untuk <span class="reason">{{ $poverty->purpose }}</span></p>
         <p class="closing-statement">Demikian surat keterangan ini kami buat dengan sebenar-benarnya agar dapat di
-            gunakan
-            sebgaimana mestinya.</p>
+            gunakan sebgaimana mestinya.</p>
     </div>
 
     <!-- Footer -->
     <div class="footer">
         <div class="signature-section">
-            <p class="date">Kepuh, {{ now()->translatedFormat('d F Y') }}</p>
+            <p class="date">Kepuh, {{ now()->translatedFormat('j F Y') }}</p>
             <p class="signature-title">An. Kepala Desa Kepuh</p>
             <p class="signature-name">[Nama Kepala Desa]</p>
             <p class="signature-nip">NIP. [NIP Kepala Desa]</p>
