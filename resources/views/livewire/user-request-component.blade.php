@@ -66,6 +66,61 @@
                     @enderror
                 </div>
             @endforeach
+            <!-- Tambah Anggota Keluarga untuk Surat Pindah (Type Letter ID 2) -->
+            @if ($type_letter_id == 2)
+                <div class="mt-6 border-t pt-4">
+                    <h3 class="text-lg font-semibold mb-4">Tambah Anggota Keluarga</h3>
+
+                    <!-- Family Member Input Fields -->
+                    @foreach ($familyMemberFields as $field)
+                        <div class="mb-4">
+                            <label for="family_{{ $field['name'] }}" class="block text-sm font-medium text-gray-700">
+                                {{ $field['label'] }}
+                            </label>
+                            <input type="{{ $field['type'] }}"
+                                wire:model="formFieldsValues.family_{{ $field['name'] }}"
+                                id="family_{{ $field['name'] }}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                placeholder="{{ $field['placeholder'] }}">
+
+                            @error('formFieldsValues.family_' . $field['name'])
+                                <span class="text-sm text-red-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    @endforeach
+
+                    <!-- Tombol Tambah Anggota Keluarga -->
+                    <div class="mb-4">
+                        <button type="button" wire:click.prevent="addFamilyMember"
+                            class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
+                            Tambah Anggota Keluarga
+                        </button>
+                    </div>
+
+                    <!-- Daftar Anggota Keluarga yang Ditambahkan -->
+                    @if (!empty($familyMembers))
+                        <div class="mt-4">
+                            <h4 class="text-md font-semibold mb-2">Daftar Anggota Keluarga</h4>
+                            <div class="space-y-2">
+                                @foreach ($familyMembers as $index => $member)
+                                    <div class="flex justify-between items-center bg-gray-100 p-3 rounded-md">
+                                        <div>
+                                            <span class="font-medium">NIK:</span> {{ $member['nik'] ?? 'N/A' }} |
+                                            <span class="font-medium">Nama:</span> {{ $member['name'] ?? 'N/A' }} |
+                                            <span class="font-medium">Status:</span> {{ $member['shdk'] ?? 'N/A' }}
+                                        </div>
+                                        <button type="button"
+                                            wire:click.prevent="removeFamilyMember({{ $index }})"
+                                            class="text-red-500 hover:text-red-700">
+                                            Hapus
+                                        </button>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            @endif
         @endif
 
         <!-- Submit Button -->

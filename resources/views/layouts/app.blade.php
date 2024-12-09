@@ -17,6 +17,7 @@
 
     <!-- Scripts -->
     @livewireStyles
+    <wireui:scripts />
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/navbar.js'])
 
     <!-- icons -->
@@ -30,6 +31,7 @@
     </main>
 
     <x-dialog z-index="z-50" blur="md" align="center" />
+    @wireUiScripts
     @livewireScripts
     <script src="{{ asset('/js/dark-mode.js') }}"></script>
 </body>

@@ -35,8 +35,8 @@ class UserRequestComponent extends Component
     ];
 
 
-    #[Layout('layouts.admin')]
-    #[Title('Ajukan Permintaan Surat')]
+    #[Layout('layouts.app')]
+    #[Title('Ajukan Permintaan Surat | Desa Kepuh')]
 
     public function mount()
     {
@@ -265,7 +265,7 @@ class UserRequestComponent extends Component
             'icon' => 'success',
             'title' => 'Permintaan Surat Berhasil Diajukan',
         ]);
-        $this->redirect(route('admin.request'));
+        $this->redirect(route('dashboard.request'));
     }
 
     // Fungsi untuk memvalidasi apakah file adalah gambar yang sah
@@ -289,7 +289,7 @@ class UserRequestComponent extends Component
 
     public function render()
     {
-        return view('livewire.admin.admin-request-component', [
+        return view('livewire.user-request-component', [
             'typeLetters' => TypeLetter::all(),
         ]);
     }
