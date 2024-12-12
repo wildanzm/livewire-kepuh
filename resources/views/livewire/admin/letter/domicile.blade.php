@@ -99,16 +99,29 @@
                                         </td>
 
                                         <td class="p-4 space-x-2 whitespace-nowrap">
+                                            <div class="flex flex-col gap-3">
 
 
-                                            @if ($request->domicileLetter)
-                                                <a href="{{ route('admin.domicile-letter.download', $request->domicileLetter->id) }}"
-                                                    class="flex flex-column items-center justify-center  py-2 text-sm font-medium text-white bg-amber-700 rounded-lg hover:bg-amber-800 focus:ring-4 focus:ring-amber-300 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800 ease-in-out duration-300">
-                                                    <span class="mr-2">Download</span>
-                                                    <x-grommet-document-download class="w-5 " />
-                                                </a>
-                                            @endif
 
+
+                                                @if ($request->domicileLetter)
+                                                    <a href="{{ route('admin.domicile-letter.download', $request->domicileLetter->id) }}"
+                                                        class="flex flex-column items-center justify-center  py-2 px-2 text-sm font-medium text-white bg-amber-700 rounded-lg hover:bg-amber-800 focus:ring-4 focus:ring-amber-300 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800 ease-in-out duration-300">
+                                                        <span class="mr-2">Download</span>
+                                                        <x-grommet-document-download class="w-5 " />
+                                                    </a>
+                                                    <a href="{{ route('admin.domicile-letter.streamPDF', $request->domicileLetter->id) }}"
+                                                        class="flex flex-column items-center justify-center  py-2 px-2 text-sm font-medium text-white bg-cyan-700 rounded-lg hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800 ease-in-out duration-300"
+                                                        target="_blank">
+                                                        <span class="mr-2">Stream</span>
+                                                        <x-iconpark-previewopen-o class="w-5" />
+                                                    </a>
+                                                    <a href="{{ route('admin.domicile.edit', $request->domicileLetter->id) }}"
+                                                        class="flex flex-column items-center justify-center  py-2 px-2 text-sm font-medium text-white bg-yellow-400 rounded-lg hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 ease-in-out duration-300">
+                                                        <span class="mr-2">Edit</span>
+                                                        <x-feathericon-edit class="w-5 " /> </a>
+                                                @endif
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

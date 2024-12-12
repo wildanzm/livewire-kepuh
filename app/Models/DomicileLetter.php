@@ -16,7 +16,8 @@ class DomicileLetter extends Model
         'nationality',
         'religion',
         'address',
-        'occupation'
+        'occupation',
+        'number_letter'
     ];
 
     public function request(): BelongsTo
