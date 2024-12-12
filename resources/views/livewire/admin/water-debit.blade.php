@@ -12,7 +12,9 @@
                         <h3 class="text-base font-light text-gray-500 dark:text-gray-400">
                             Rekapan Perhari
                         </h3>
-                        <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
+                        <div class="w-[1000px]">
+                            <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
+                        </div>
                     </div>
                 </div>
                 <!-- Rekapan End -->
@@ -79,9 +81,11 @@
                                 -70</span>
                         </div>
                     </div>
+                    <div class="mt-5">
+                        <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
+                    </div>
                 </div>
                 <!-- Buat Chart 1 -->
-                <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
             </div>
             <div
                 class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -99,9 +103,11 @@
                                 -65</span>
                         </div>
                     </div>
+                    <div class="mt-5">
+                        <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
+                    </div>
                 </div>
                 <!-- Buat Chart 2 -->
-                <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
             </div>
             <div
                 class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -119,11 +125,13 @@
                                 -70</span>
                         </div>
                     </div>
-
+                    <div class="mt-5">
+                        <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
+                    </div>
                 </div>
             </div>
             <!-- Buat Chart 3 -->
-            <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
+
         </div>
 
         <!-- 2 columns -->
