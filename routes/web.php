@@ -13,6 +13,7 @@ use App\Livewire\Admin\UserRequestComponent;
 use App\Livewire\Admin\Letter\Domicile;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\Letter\EditPoverty;
+use App\Livewire\Admin\WaterDebit;
 use App\Livewire\Index;
 use App\Livewire\User\RequestDashboard;
 
@@ -30,6 +31,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/domicile-letter/edit/{id}', EditDomicile::class)->name('domicile.edit');
     Route::get('/poverty-letter', Poverty::class)->name('poverty-letter');
     Route::get('/poverty/edit/{id}', action: EditPoverty::class)->name('poverty.edit');
+    Route::get('/water-debit', WaterDebit::class)->name('water');
 });
 
 
