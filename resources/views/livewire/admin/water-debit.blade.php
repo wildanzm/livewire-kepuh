@@ -13,7 +13,7 @@
                             Rekapan Perhari
                         </h3>
                         <div class="w-[1000px]">
-                            <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
+                            {{-- <livewire:livewire-column-chart :column-chart-model="" /> --}}
                         </div>
                     </div>
                 </div>
@@ -65,68 +65,77 @@
             <!--Tabs widget -->
         </div>
         <div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">
+            <!-- Mesjid 1 -->
             <div
                 class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <div class="w-full">
                     <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-400 mb-5">Mesjid 1</h3>
                     <div class="flex gap-4">
                         <div>
-                            <p class="text-gray-400">Flow_Rate</p>
-                            <span
-                                class="text-xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">15</span>
+                            <p class="text-gray-400">Flow Rate</p>
+                            <span class="text-xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">
+                                {{ $node1['flow_rate'] }}
+                            </span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <p class="text-gray-400">rssi</p>
+                            <p class="text-gray-400">RSSI</p>
                             <span class="text-xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">
-                                -70</span>
+                                {{ $node1['rssi'] }}
+                            </span>
                         </div>
                     </div>
                     <div class="mt-5">
-                        <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
+                        <livewire:livewire-column-chart :column-chart-model="$node1Chart" wire:poll.5s="render" />
                     </div>
                 </div>
-                <!-- Buat Chart 1 -->
             </div>
+
+            <!-- Mesjid 2 -->
             <div
                 class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <div class="w-full">
                     <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-400 mb-5">Mesjid 2</h3>
                     <div class="flex gap-4">
                         <div>
-                            <p class="text-gray-400">Flow_Rate</p>
-                            <span
-                                class="text-xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">15</span>
+                            <p class="text-gray-400">Flow Rate</p>
+                            <span class="text-xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">
+                                {{ $node2['flow_rate'] }}
+                            </span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <p class="text-gray-400">rssi</p>
+                            <p class="text-gray-400">RSSI</p>
                             <span class="text-xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">
-                                -65</span>
+                                {{ $node2['rssi'] }}
+                            </span>
                         </div>
                     </div>
                     <div class="mt-5">
-                        <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
+                        <livewire:livewire-column-chart :column-chart-model="$node2Chart" wire:poll.5s="render" />
                     </div>
                 </div>
-                <!-- Buat Chart 2 -->
             </div>
+
+            <!-- Mesjid 3 -->
             <div
                 class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <div class="w-full">
                     <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-400 mb-5">Mesjid 3</h3>
                     <div class="flex gap-4">
                         <div>
-                            <p class="text-gray-400">Flow_Rate</p>
-                            <span
-                                class="text-xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">15</span>
+                            <p class="text-gray-400">Flow Rate</p>
+                            <span class="text-xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">
+                                {{ $node3['flow_rate'] }}
+                            </span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <p class="text-gray-400">rssi</p>
+                            <p class="text-gray-400">RSSI</p>
                             <span class="text-xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">
-                                -70</span>
+                                {{ $node3['rssi'] }}
+                            </span>
                         </div>
                     </div>
                     <div class="mt-5">
-                        <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
+                        <livewire:livewire-column-chart :column-chart-model="$node3Chart" wire:poll.5s="render" />
                     </div>
                 </div>
             </div>
