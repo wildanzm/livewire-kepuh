@@ -290,7 +290,7 @@ class AdminRequestComponent extends Component
     public function render()
     {
         return view('livewire.admin.admin-request-component', [
-            'typeLetters' => TypeLetter::all(),
+            'typeLetters' => TypeLetter::whereIn('id', [1, 3])->get(),
         ]);
     }
 }

@@ -289,8 +289,12 @@ class UserRequestComponent extends Component
 
     public function render()
     {
+        // Ambil data yang diperlukan
+        $typeLetters = TypeLetter::whereIn('id', [1, 3])->get();
+
+        // Kirim data ke view
         return view('livewire.user-request-component', [
-            'typeLetters' => TypeLetter::all(),
+            'typeLetters' => $typeLetters,
         ]);
     }
 }

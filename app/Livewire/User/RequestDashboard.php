@@ -10,12 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class RequestDashboard extends Component
 {
+    public $requests;
+
     #[Layout('layouts.app')]
     #[Title('Permintaan Surat | Desa Kepuh')]
     public function render()
     {
-        return view('livewire.user.request-dashboard', [
-            'requests' => Request::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get(),
-        ]);
+        $this->requests = Request::where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('livewire.user.request-dashboard');
     }
 }

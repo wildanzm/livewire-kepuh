@@ -6,7 +6,7 @@
         <!-- Button Tambah Permintaan -->
         <div
             class="flex lg:items-center justify-start items-start space-x-2 sm:space-x-3 mt-2 lg:mt-0 ml-auto w-full lg:w-auto">
-            <a href="{{ route('request.letter') }}" wire:navigate>
+            <a href="{{ route('request.letter') }}">
                 <button type="submit"
                     class="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full sm:w-auto">
                     <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20"

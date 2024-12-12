@@ -7,12 +7,12 @@ use Livewire\Component;
 use App\Models\PovertyLetter;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
-use Spatie\Browsershot\Browsershot;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Poverty extends Component
 {
     #[Layout('layouts.admin')]
-    #[Title('Surat Domisili | Desa Kepuh')]
+    #[Title('Surat Keterangan Tidak Mampu | Desa Kepuh')]
 
     public $letters;
     public $isModalOpen = false;
@@ -42,34 +42,42 @@ class Poverty extends Component
     }
     public function downloadPDF($id)
     {
-        // Ambil data DomicileLetter berdasarkan ID
-        $poverty = PovertyLetter::findOrFail($id);
+        //composer require barryvdh/laravel-dompdf
+        // Retrieve data for the document
+        $povertyLetter = PovertyLetter::findOrFail($id);
 
-        // Generate konten HTML dari view
+        // Generate HTML content
         $htmlContent = view('pdf.poverty_letter', compact('poverty'))->render();
 
-        // Gunakan Browsershot untuk membuat PDF sebagai string
-        $pdfContent = Browsershot::html($htmlContent)
-            ->addChromiumArguments(['--no-sandbox', '--disable-setuid-sandbox'])
-            ->timeout(60) // Ubah timeout ke 60 detik
-            ->format('A4') // Ukuran kertas
-            ->setOption('displayHeaderFooter', false) // Hilangkan header/footer default
-            ->pdf(); // Kembalikan PDF sebagai string
+        // Generate PDF using DomPDF
+        $pdf = Pdf::loadHTML($htmlContent)
+            ->setPaper('a4') // Set the paper size (optional)
+            ->setOption('isHtml5ParserEnabled', true) // Optional settings
+            ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
 
-        // Kembalikan PDF untuk ditampilkan di browser
-        return response($pdfContent, 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => "inline; filename=domicile-letter-{$poverty->id}.pdf",
-        ]);
+        // Return the PDF as a download
+        $pdfFileName = "poverty-letter-{$id}.pdf";
+        return $pdf->download($pdfFileName);
     }
 
-
-
-    public function cobapdf()
+    public function streamPDF($id)
     {
+        // Retrieve data for the document
+        $povertyLetter = PovertyLetter::findOrFail($id);
+
+        // Generate PDF using DomPDF
+        $pdf = Pdf::loadView('pdf.poverty_letter', ['poverty' => $povertyLetter])
+            ->setPaper('a4') // Set the paper size (optional)
+            ->setOption('isHtml5ParserEnabled', true) // Optional settings
+            ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
+
+        // Save the PDF to a specific directory
+        $pdfFileName = "poverty-letter-{$id}.pdf";
+        $filePath = ('pdf/' . $pdfFileName);
+        $pdf->save($filePath);
 
 
-        // Generate konten HTML dari view
-        $htmlContent = view('pdf.poverty_letter');
+        // Stream the PDF to the browser
+        return $pdf->stream();
     }
 }

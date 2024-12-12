@@ -21,9 +21,9 @@ new #[Layout('layouts.guest')] #[Title('Login | Desa Kepuh')] class extends Comp
         Session::regenerate();
 
         if (auth()->user()->hasRole('admin')) {
-            $this->redirectIntended(default: route('admin.request', absolute: false), navigate: true);
+            $this->redirect(route('admin.request'));
         } elseif (auth()->user()->hasRole('user')) {
-            $this->redirectIntended(default: route('index', absolute: false), navigate: true);
+            $this->redirect(route('index'));
         }
     }
 }; ?>

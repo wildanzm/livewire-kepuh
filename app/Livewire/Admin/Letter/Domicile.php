@@ -8,7 +8,7 @@ use App\Models\DomicileLetter;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use Spatie\Browsershot\Browsershot;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Domicile extends Component
 {
@@ -22,6 +22,7 @@ class Domicile extends Component
 
     public function render()
     {
+
         $requests = Request::whereHas('typeLetter', function ($query) {
             $query->where('name', 'Surat Domisili');
         })
@@ -49,37 +50,44 @@ class Domicile extends Component
         $this->isModalOpen = false; // Close modal
     }
 
-
-
-
-
-
-
-
     public function downloadPDF($id)
     {
-        // Check if PDF already exists in storage
+        //composer require barryvdh/laravel-dompdf
+        // Retrieve data for the document
+        $domicileLetter = DomicileLetter::findOrFail($id);
+
+        // Generate HTML content
+        $htmlContent = view('pdf.domicile_letter', compact('domicileLetter'))->render();
+
+        // Generate PDF using DomPDF
+        $pdf = Pdf::loadHTML($htmlContent)
+            ->setPaper('a4') // Set the paper size (optional)
+            ->setOption('isHtml5ParserEnabled', true) // Optional settings
+            ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
+
+        // Return the PDF as a download
         $pdfFileName = "domicile-letter-{$id}.pdf";
-        $pdfPath = storage_path("app/{$pdfFileName}");
+        return $pdf->download($pdfFileName);
+    }
 
-        if (!file_exists($pdfPath)) {
-            // Retrieve data for the document
-            $domicileLetter = DomicileLetter::findOrFail($id);
+    public function streamPDF($id)
+    {
+        // Retrieve data for the document
+        $domicileLetter = DomicileLetter::findOrFail($id);
 
-            // Generate HTML content
-            $htmlContent = view('pdf.domicile_letter', compact('domicileLetter'))->render();
+        // Generate PDF using DomPDF
+        $pdf = Pdf::loadView('pdf.domicile_letter', ['domicileLetter' => $domicileLetter])
+            ->setPaper('a4') // Set the paper size (optional)
+            ->setOption('isHtml5ParserEnabled', true) // Optional settings
+            ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
 
-            // Generate PDF and save it
-            Browsershot::html($htmlContent)
-                ->format('A4')
-                ->showBackground()
-                ->disableJavascript()
-                ->timeout(10)
-                ->setOption('args', ['--no-sandbox', '--disable-setuid-sandbox'])
-                ->save($pdfPath);
-        }
+        // Save the PDF to a specific directory
+        $pdfFileName = "domicile-letter-{$id}.pdf";
+        $filePath = ('pdf/' . $pdfFileName);
+        $pdf->save($filePath);
 
-        // Return the cached PDF as a download
-        return response()->download($pdfPath)->deleteFileAfterSend(false);
+
+        // Stream the PDF to the browser
+        return $pdf->stream();
     }
 }

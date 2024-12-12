@@ -4,6 +4,7 @@
 
 use App\Http\Controllers\Admin\DomicileController;
 use App\Livewire\Admin\AdminRequestComponent;
+use App\Livewire\Admin\Letter\EditDomicile;
 use App\Livewire\Admin\Letter\Poverty;
 use App\Livewire\DomicileLetterPdf;
 use App\Livewire\Admin\RequestIndex;
@@ -22,12 +23,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     Route::get('/domicile-letter/{id}/download', [Domicile::class, 'downloadPDF'])->name('domicile-letter.download');
     Route::get('/poverty-letter/{id}/download', [Poverty::class, 'downloadPDF'])->name('poverty-letter.download');
-    // Route::get('/domicile-letter/{id}/download', [Domicile::class, 'downloadPDF'])->name('domicile-letter.download');
+    Route::get('/domicile-letter/{id}/preview', [Domicile::class, 'streamPDF'])->name('domicile-letter.streamPDF');
+    Route::get('/poverty-letter/{id}/preview', [Poverty::class, 'streamPDF'])->name('poverty-letter.streamPDF');
 
     Route::get('/domicile-letter', Domicile::class)->name('domicile-letter');
+    Route::get('/domicile-letter/edit/{id}', EditDomicile::class)->name('domicile.edit');
     Route::get('/poverty-letter', Poverty::class)->name('poverty-letter');
     Route::get('/poverty/edit/{id}', action: EditPoverty::class)->name('poverty.edit');
-    Route::get('/cobapdf', [Poverty::class, 'cobapdf'])->name('cobapdf');
 });
 
 
