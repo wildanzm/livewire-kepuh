@@ -90,22 +90,24 @@
                                         {{ $request->typeLetter->name }}
                                     </td>
                                     <!-- Thumbnail Images -->
-                                    <!-- Thumbnail Images -->
                                     <td
                                         class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <!-- Thumbnail for KTP -->
-                                        <img src="{{ Storage::url($request->image_ktp) }}" alt="KTP Image"
-                                            class="h-24 w-auto rounded-md cursor-pointer"
-                                            wire:click="openModal('{{ Storage::url($request->image_ktp) }}')" />
+                                        <!-- Link for KTP -->
+                                        <a href="#" class="text-blue-600 underline cursor-pointer"
+                                            wire:click="openModal('{{ Storage::url($request->image_ktp) }}')">
+                                            Lihat KTP
+                                        </a>
                                     </td>
 
                                     <td
                                         class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <!-- Thumbnail for Selfie -->
-                                        <img src="{{ Storage::url($request->image_selfie) }}" alt="Selfie Image"
-                                            class="h-24 w-auto rounded-md cursor-pointer"
-                                            wire:click="openModal('{{ Storage::url($request->image_selfie) }}')" />
+                                        <!-- Link for Selfie -->
+                                        <a href="#" class="text-blue-600 underline cursor-pointer"
+                                            wire:click="openModal('{{ Storage::url($request->image_selfie) }}')">
+                                            Lihat Selfie
+                                        </a>
                                     </td>
+
 
 
 
