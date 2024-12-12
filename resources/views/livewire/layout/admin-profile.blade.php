@@ -15,7 +15,6 @@ new class extends Component {
 
 <div class="flex items-center">
     <div class="flex items-center ms-3 gap-2">
-        <x-button-dark />
         <div>
             <button type="button"
                 class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"

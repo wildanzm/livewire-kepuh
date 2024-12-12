@@ -33,7 +33,6 @@
     <x-dialog z-index="z-50" blur="md" align="center" />
     @wireUiScripts
     @livewireScripts
-    <script src="{{ asset('/js/dark-mode.js') }}"></script>
 </body>
 
 </html>
