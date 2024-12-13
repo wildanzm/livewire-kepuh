@@ -3,17 +3,17 @@
         <div class="gap-4 2xl:grid-cols-3">
             <!-- Main widget -->
             <!-- Rekapan start -->
+
             <div
                 class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex-shrink-0">
-                        <span
-                            class="text-xl font-bold leading-none text-gray-900 sm:text-2xl dark:text-white">Rekap</span>
-                        <h3 class="text-base font-light text-gray-500 dark:text-gray-400">
-                            Rekapan Perhari
-                        </h3>
-                        <div class="w-[1000px]">
-                            {{-- <livewire:livewire-column-chart :column-chart-model="" /> --}}
+                        {{-- <canvas id="flowRateChart" width="800" height="400">
+                        </canvas> --}}
+                        <div class="">
+
+                            <iframe src="https://api.kepuh.co.id/flow.php" width="1000" height="600"></iframe>
+                            <iframe src="https://api.kepuh.co.id/rssi.php" width="1000" height="600"></iframe>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
             </div>
             <!--Tabs widget -->
         </div>
-        <div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">
+        {{-- <div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">
             <!-- Mesjid 1 -->
             <div
                 class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -141,8 +141,87 @@
             </div>
             <!-- Buat Chart 3 -->
 
-        </div>
+        </div> --}}
 
         <!-- 2 columns -->
     </div>
+    <script>
+        document.addEventListener('livewire:load', function() {
+            // Debug data
+            const node1Data = @json($node1Data ?? [10, 20, 30]); // Ganti dengan data statis sementara
+            const node2Data = @json($node2Data ?? [15, 25, 35]);
+            const node3Data = @json($node3Data ?? [20, 30, 40]);
+
+            console.log({
+                node1Data,
+                node2Data,
+                node3Data
+            }); // Debugging
+
+            const chartCanvas = document.getElementById('flowRateChart');
+            if (!chartCanvas) {
+                console.error('Canvas element not found!');
+                return;
+            }
+
+            // Labels for X-Axis
+            const labels = Array.from({
+                length: Math.max(node1Data.length, node2Data.length, node3Data.length)
+            }, (_, i) => i + 1);
+
+            // Render Chart
+            new Chart(chartCanvas.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                            label: 'Node 1 Flow Rate',
+                            data: node1Data,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Node 2 Flow Rate',
+                            data: node2Data,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Node 3 Flow Rate',
+                            data: node3Data,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Data Points'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Flow Rate'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </main>

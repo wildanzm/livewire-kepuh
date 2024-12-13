@@ -14,6 +14,35 @@ class WaterDebit extends Component
     #[Layout('layouts.admin')]
     #[Title('Debit Air | Desa Kepuh')]
 
+    public $node1Data = [];
+    public $node2Data = [];
+    public $node3Data = [];
+
+    public function mount()
+    {
+        // Fetch flow rate data for each node from the database
+        $this->node1Data = DB::table('volume_air')
+            ->where('node_id', 'node1')
+            ->orderByDesc('timestamp')
+            ->limit(60)
+            ->pluck('flow_rate')
+            ->toArray();
+
+        $this->node2Data = DB::table('volume_air')
+            ->where('node_id', 'node2')
+            ->orderByDesc('timestamp')
+            ->limit(60)
+            ->pluck('flow_rate')
+            ->toArray();
+
+        $this->node3Data = DB::table('volume_air')
+            ->where('node_id', 'node3')
+            ->orderByDesc('timestamp')
+            ->limit(60)
+            ->pluck('flow_rate')
+            ->toArray();
+    }
+
     // public $columnChartModel;
     // public $dateRange = 'daily'; // Default to 'daily'
 
@@ -91,63 +120,56 @@ class WaterDebit extends Component
 
     public function render()
     {
-        // Fetch the latest data for each node
-        $node1Data = DB::table('volume_air')
-            ->select('flow_rate', 'rssi')
-            ->where('Node_id', 'node1')
-            ->orderBy('timestamp', 'desc')
-            ->first();
+        // // Fetch the latest data for each node
+        // $node1Data = DB::table('volume_air')
+        //     ->select('flow_rate', 'rssi')
+        //     ->where('Node_id', 'node1')
+        //     ->orderBy('timestamp', 'desc')
+        //     ->first();
 
-        $node2Data = DB::table('volume_air')
-            ->select('flow_rate', 'rssi')
-            ->where('Node_id', 'node2')
-            ->orderBy('timestamp', 'desc')
-            ->first();
+        // $node2Data = DB::table('volume_air')
+        //     ->select('flow_rate', 'rssi')
+        //     ->where('Node_id', 'node2')
+        //     ->orderBy('timestamp', 'desc')
+        //     ->first();
 
-        $node3Data = DB::table('volume_air')
-            ->select('flow_rate', 'rssi')
-            ->where('Node_id', 'node3')
-            ->orderBy('timestamp', 'desc')
-            ->first();
+        // $node3Data = DB::table('volume_air')
+        //     ->select('flow_rate', 'rssi')
+        //     ->where('Node_id', 'node3')
+        //     ->orderBy('timestamp', 'desc')
+        //     ->first();
 
-        // Prepare the fallback for missing data
-        $node1 = [
-            'flow_rate' => $node1Data->flow_rate ?? 0,
-            'rssi' => $node1Data->rssi ?? 0,
-        ];
-        $node2 = [
-            'flow_rate' => $node2Data->flow_rate ?? 0,
-            'rssi' => $node2Data->rssi ?? 0,
-        ];
-        $node3 = [
-            'flow_rate' => $node3Data->flow_rate ?? 0,
-            'rssi' => $node3Data->rssi ?? 0,
-        ];
+        // // Prepare the fallback for missing data
+        // $node1 = [
+        //     'flow_rate' => $node1Data->flow_rate ?? 0,
+        //     'rssi' => $node1Data->rssi ?? 0,
+        // ];
+        // $node2 = [
+        //     'flow_rate' => $node2Data->flow_rate ?? 0,
+        //     'rssi' => $node2Data->rssi ?? 0,
+        // ];
+        // $node3 = [
+        //     'flow_rate' => $node3Data->flow_rate ?? 0,
+        //     'rssi' => $node3Data->rssi ?? 0,
+        // ];
 
-        // Create ColumnChartModel objects for each node
-        $node1ChartModel = new ColumnChartModel();
-        $node1ChartModel->setTitle('Debit Air Mesjid 1')
-            ->addColumn('Flow Rate', $node1['flow_rate'], '#f6ad55')
-            ->addColumn('RSSI', abs($node1['rssi']), '#90cdf4');
+        // // Create ColumnChartModel objects for each node
+        // $node1ChartModel = new ColumnChartModel();
+        // $node1ChartModel->setTitle('Debit Air Mesjid 1')
+        //     ->addColumn('Flow Rate', $node1['flow_rate'], '#f6ad55')
+        //     ->addColumn('RSSI', abs($node1['rssi']), '#90cdf4');
 
-        $node2ChartModel = new ColumnChartModel();
-        $node2ChartModel->setTitle('Debit Air Mesjid 2')
-            ->addColumn('Flow Rate', $node2['flow_rate'], '#f6ad55')
-            ->addColumn('RSSI', abs($node2['rssi']), '#90cdf4');
+        // $node2ChartModel = new ColumnChartModel();
+        // $node2ChartModel->setTitle('Debit Air Mesjid 2')
+        //     ->addColumn('Flow Rate', $node2['flow_rate'], '#f6ad55')
+        //     ->addColumn('RSSI', abs($node2['rssi']), '#90cdf4');
 
-        $node3ChartModel = new ColumnChartModel();
-        $node3ChartModel->setTitle('Debit Air Mesjid 3')
-            ->addColumn('Flow Rate', $node3['flow_rate'], '#f6ad55')
-            ->addColumn('RSSI', abs($node3['rssi']), '#90cdf4');
+        // $node3ChartModel = new ColumnChartModel();
+        // $node3ChartModel->setTitle('Debit Air Mesjid 3')
+        //     ->addColumn('Flow Rate', $node3['flow_rate'], '#f6ad55')
+        //     ->addColumn('RSSI', abs($node3['rssi']), '#90cdf4');
 
         // Return the view with the ColumnChartModel objects
-        return view('livewire.admin.water-debit')->with([
-            'node1' => $node1,
-            'node2' => $node2,
-            'node3' => $node3,
-            'node1Chart' => $node1ChartModel, // Pass the ColumnChartModel object
-            'node2Chart' => $node2ChartModel, // Pass the ColumnChartModel object
-            'node3Chart' => $node3ChartModel, // Pass the ColumnChartModel object
-        ]);
+        return view('livewire.admin.water-debit');
     }
 }
