@@ -10,8 +10,8 @@
                     <div class="flex-shrink-0">
                         {{-- <canvas id="flowRateChart" width="800" height="400">
                         </canvas> --}}
-                        <div class="">
-
+                        <div>
+                            <h1 class="text-3xl font-bold ">Data Debit Air</h1>
                             <iframe src="https://api.kepuh.co.id/flow.php" width="1000" height="600"></iframe>
                             <iframe src="https://api.kepuh.co.id/rssi.php" width="1000" height="600"></iframe>
                         </div>
