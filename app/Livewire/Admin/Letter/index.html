@@ -3,20 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Surat Keterangan Domisili</title>
+        <title>Surat Keterangan Pindah WNI</title>
         <style>
-            @media print {
-                body {
-                    width: 210mm;
-                    height: 297mm;
-                }
-            }
-
             body {
-                background-color: white;
-                color: #111827;
+                font-family: Arial, sans-serif;
                 padding: 2rem;
-                font-family: serif;
+                line-height: 1.6;
             }
 
             table {
@@ -24,181 +16,167 @@
                 border-collapse: collapse;
             }
 
-            .header-table,
-            .footer-table {
-                margin-bottom: 1rem;
-                padding: 10rem;
+            td,
+            th {
+                padding: 5px;
+                vertical-align: top;
             }
 
-            .header-table td {
-                vertical-align: middle;
+            .header {
+                text-align: center;
             }
 
-            .logo {
+            .header img {
                 width: 70px;
-                height: auto;
             }
 
-            .government-name {
-                font-size: 1.5rem;
+            .header-title {
+                font-size: 1.2rem;
                 font-weight: bold;
                 text-transform: uppercase;
             }
 
-            .district-name,
-            .village-name {
-                font-size: 1.5rem;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-
-            .address {
-                font-size: 1rem;
-                font-weight: 500;
-            }
-
-            .header-divider {
-                border: 2px solid black;
-                margin-top: 0.5rem;
-                margin-bottom: 1rem;
-            }
-
-            .letter-title {
+            .title {
                 text-align: center;
-                font-size: 1.25rem;
-                font-weight: bold;
+                margin: 1.5rem 0;
                 text-transform: uppercase;
-                text-decoration: underline;
-                margin: 1rem 0;
+                font-weight: bold;
             }
 
-            .letter-number {
-                text-align: center;
-                margin-bottom: 1.5rem;
-            }
-
-            .content {
-                font-size: 1.1rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .person-details {
-                margin-bottom: 1.5rem;
-                font-size: 1.1rem;
+            .section-title {
+                font-weight: bold;
+                margin-top: 1rem;
             }
 
             .footer {
+                margin-top: 3rem;
+                text-align: right;
+            }
+
+            .footer .signature {
                 margin-top: 4rem;
-                font-size: 1.1rem;
             }
 
-            .signature-section {
+            .qr-code {
+                margin-top: 1rem;
                 text-align: center;
-            }
-
-            .signature-title {
-                margin-bottom: 6rem;
-            }
-
-            .signature-name {
-                font-weight: bold;
             }
         </style>
     </head>
-
     <body>
         <!-- Header -->
-        <table class="header-table">
+        <table>
             <tr>
-                <td style="width: 80px">
-                    <img
-                        src="{{ public_path('images/sindangkasih-sugih-mukti-logo-7BA62C1744-seeklogo.com.png') }}"
-                        alt="Logo Pemerintah"
-                        class="logo"
-                    />
+                <td style="width: 10%">
+                    <img src="logo.png" alt="Logo Pemerintah" />
                 </td>
-                <td align="center">
+                <td class="header">
+                    <div class="header-title">PEMERINTAH KABUPATEN SUBANG</div>
+                    <div>DINAS KEPENDUDUKAN DAN PENCATATAN SIPIL</div>
+                    <div>KABUPATEN SUBANG</div>
                     <div>
-                        <div class="government-name">
-                            Pemerintah Kabupaten Majalengka
-                        </div>
-                        <div class="district-name">Kecamatan Lemahsugih</div>
-                        <div class="village-name">Desa Kepuh</div>
-                        <div class="address">
-                            Alamat: Jln Raya Desa Kepuh No 01 Kec. Lemahsugih
-                            Kab. Majalengka 45465
-                        </div>
+                        JL. MAYJEN SUTOYO SISWOMIHARJO NO. 50 KODE POS 41211
                     </div>
+                    <div>TELP 0260411424 FAX 0260411424</div>
                 </td>
             </tr>
         </table>
-        <hr class="header-divider" />
+        <hr />
 
-        <!-- Content -->
-        <div class="content">
-            <h3 class="letter-title">Surat Keterangan Berdomisili</h3>
-            <p class="letter-number">Nomor: [Nomor Surat]</p>
-            <p>
-                Yang bertanda tangan di bawah ini, Kepala Desa Kepuh Kecamatan
-                Lemahsugih Kabupaten Majalengka, dengan ini menerangkan bahwa:
-            </p>
-            <table class="person-details">
-                <tr>
-                    <td style="width: 35%">NIK</td>
-                    <td>: {{ $domicileLetter->nik }}</td>
-                </tr>
-                <tr>
-                    <td>Nama Lengkap</td>
-                    <td>: {{ $domicileLetter->name }}</td>
-                </tr>
-                <tr>
-                    <td>Jenis Kelamin</td>
-                    <td>: {{ $domicileLetter->gender }}</td>
-                </tr>
-                <tr>
-                    <td>Tempat/Tgl Lahir</td>
-                    <td>: {{ $domicileLetter->birth_date }}</td>
-                </tr>
-                <tr>
-                    <td>Bangsa/Agama</td>
-                    <td>: {{ $domicileLetter->religion }}</td>
-                </tr>
-                <tr>
-                    <td>Pekerjaan</td>
-                    <td>: {{ $domicileLetter->occupation }}</td>
-                </tr>
-                <tr>
-                    <td>Alamat pada KTP</td>
-                    <td>: {{ $domicileLetter->address }}</td>
-                </tr>
-            </table>
-            <p>
-                Bahwa yang bersangkutan benar-benar Berdomisili di kepuh RT 013
-                RW 004 Desa Kepuh Kecamatan Lemahsugih Kabupaten Majalengka
-            </p>
-            <p>
-                Demikian surat keterangan domisili ini kami buat dengan
-                sebenarnya agar di gunakan dengan sebaik-baiknya.
-            </p>
+        <!-- Title -->
+        <div class="title">
+            SURAT KETERANGAN PINDAH WNI<br />
+            ANTAR PROVINSI<br />
+            SKPWNI/3213/02012023/0042
         </div>
 
-        <!-- Footer -->
-        <table
-            class="footer-table"
-            style="margin-left: auto; text-align: right; width: auto"
-        >
+        <!-- Data Daerah Asal -->
+        <div class="section-title">DATA DAERAH ASAL</div>
+        <table>
             <tr>
-                <td>
-                    <div class="signature-section">
-                        <p class="date">
-                            Kepuh, {{ now()->translatedFormat('j F Y') }}
-                        </p>
-                        <p class="signature-title">An. Kepala Desa Kepuh</p>
-                        <p class="signature-name">[Nama Kepala Desa]</p>
-                        <p class="signature-nip">NIP. [NIP Kepala Desa]</p>
-                    </div>
-                </td>
+                <td>1. Nomor Kartu Keluarga</td>
+                <td>: 321304307007007</td>
+            </tr>
+            <tr>
+                <td>2. Nama Kepala Keluarga</td>
+                <td>: YAHYA MESIAS LAKUNSING</td>
+            </tr>
+            <tr>
+                <td>3. Alamat</td>
+                <td>: KP. SITUBUKI V RT. 002 RW. 001</td>
+            </tr>
+            <tr>
+                <td>4. NIK Pemohon</td>
+                <td>: 3213047003980002</td>
+            </tr>
+            <tr>
+                <td>5. Nama Lengkap</td>
+                <td>: HELEN MARCELINA</td>
             </tr>
         </table>
+
+        <!-- Data Kepindahan -->
+        <div class="section-title">DATA KEPINDAHAN</div>
+        <table>
+            <tr>
+                <td>1. Alasan Pindah</td>
+                <td>: LAIN-LAIN</td>
+            </tr>
+            <tr>
+                <td>2. Alamat Tujuan Pindah</td>
+                <td>: KP. SITUBUKI RT. 002 RW. 003</td>
+            </tr>
+            <tr>
+                <td>3. Klasifikasi Pindah</td>
+                <td>: ANTAR PROVINSI</td>
+            </tr>
+            <tr>
+                <td>4. Jenis Kepindahan</td>
+                <td>: ANGG. KELUARGA</td>
+            </tr>
+            <tr>
+                <td>5. Status KK yang Tidak Pindah</td>
+                <td>: -</td>
+            </tr>
+            <tr>
+                <td>6. Status KK yang Pindah</td>
+                <td>: MEMBUAT KK BARU</td>
+            </tr>
+        </table>
+
+        <!-- Keluarga yang Pindah -->
+        <div class="section-title">KELUARGA YANG PINDAH</div>
+        <table border="1">
+            <tr>
+                <th>No.</th>
+                <th>NIK</th>
+                <th>Nama</th>
+                <th>Tgl. Lahir</th>
+                <th>SHDK</th>
+            </tr>
+            <tr>
+                <td>1.</td>
+                <td>3213047003980002</td>
+                <td>HELEN MARCELINA</td>
+                <td>30-03-1998</td>
+                <td>ANAK</td>
+            </tr>
+        </table>
+
+        <!-- Footer -->
+        <div class="footer">
+            Subang, 02-01-2023<br />
+            Dikeluarkan Oleh:<br />
+            DINAS KEPENDUDUKAN DAN PENCATATAN SIPIL KABUPATEN SUBANG
+            <div class="signature">
+                <div>Dr. H. SUMARNA, S.Sos., M.AP</div>
+                <div>NIP: 196812011989031010</div>
+            </div>
+        </div>
+
+        <!-- QR Code -->
+        <div class="qr-code">
+            <img src="qr-code.png" alt="QR Code" />
+        </div>
     </body>
 </html>

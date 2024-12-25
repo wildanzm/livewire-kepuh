@@ -73,7 +73,7 @@ class EditPoverty extends Component
             'number_letter' => $this->number_letter, // Tambahkan ini
         ]);
 
-        session()->flash('message', 'Data berhasil diperbarui!');
+        session()->flash('success', 'Data berhasil diperbarui!');
         return redirect()->route('admin.poverty-letter'); // Ganti sesuai dengan route index Anda
     }
 

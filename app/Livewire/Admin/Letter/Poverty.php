@@ -4,10 +4,11 @@ namespace App\Livewire\Admin\Letter;
 
 use App\Models\Request;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use App\Models\PovertyLetter;
 use Livewire\Attributes\Title;
-use Livewire\Attributes\Layout;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\Layout;
 
 class Poverty extends Component
 {
@@ -55,8 +56,10 @@ class Poverty extends Component
             ->setOption('isHtml5ParserEnabled', true) // Optional settings
             ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
 
+        // Format nama surat untuk mencegah karakter tidak valid
+        $namaSurat = Str::slug($povertyLetter->name); // Menggunakan slug agar aman untuk nama file
         // Return the PDF as a download
-        $pdfFileName = "poverty-letter-{$id}.pdf";
+        $pdfFileName = "surat-keterangan-tidak-mampu-{$namaSurat}.pdf";
         return $pdf->download($pdfFileName);
     }
 
@@ -71,9 +74,12 @@ class Poverty extends Component
             ->setOption('isHtml5ParserEnabled', true) // Optional settings
             ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
 
+        // Format nama surat untuk mencegah karakter tidak valid
+        $namaSurat = Str::slug($povertyLetter->name); // Menggunakan slug agar aman untuk nama file
         // Save the PDF to a specific directory
-        $pdfFileName = "poverty-letter-{$id}.pdf";
-        $filePath = ('pdf/' . $pdfFileName);
+        $pdfFileName = "surat-keterangan-tidak-mampu-{$namaSurat}.pdf";
+        // Simpan file ke dalam folder 'storage/app/public/pdf'
+        $filePath = storage_path("app/public/pdf/{$pdfFileName}");
         $pdf->save($filePath);
 
 

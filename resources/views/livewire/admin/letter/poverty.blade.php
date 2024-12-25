@@ -8,6 +8,23 @@
                         Keterangan Tidak Mampu
                     </h1>
                 </div>
+                <div>
+                    @if (session()->has('success'))
+                        <x-notifications />
+                        <script>
+                            // Menampilkan notifikasi menggunakan WireUI
+                            window.addEventListener('DOMContentLoaded', () => {
+                                setTimeout(() => {
+                                    window.$wireui.notify({
+                                        icon: 'success',
+                                        title: 'Success',
+                                        description: "{{ session('success') }}",
+                                    });
+                                }, 500); // Delay opsional 0.5 detik agar lebih mulus
+                            });
+                        </script>
+                    @endif
+                </div>
                 <div class="sm:flex">
                     <div
                         class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
@@ -81,21 +98,26 @@
                                             {{ $request->typeLetter->name }}
                                         </td>
                                         <td
-                                            class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $request->povertyLetter->number_letter ?? 'Data tidak tersedia' }}
+                                            class="p-4 text-base font-medium text-gray-900 break-words whitespace-normal dark:text-white ">
+                                            {{ $request->povertyLetter->number_letter ?? 'Belum ada nomor surat. Edit data untuk menambahkan nomor surat.' }}
                                         </td>
                                         <!-- Thumbnail Images -->
                                         <td
                                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <img src="{{ Storage::url($request->image_ktp) }}" alt="KTP Image"
-                                                class="h-24 w-auto rounded-md cursor-pointer"
-                                                wire:click="openModal('{{ Storage::url($request->image_ktp) }}')" />
+                                            <!-- Link for KTP -->
+                                            <a href="#" class="text-blue-600 underline cursor-pointer"
+                                                wire:click="openModal('{{ Storage::url($request->image_ktp) }}')">
+                                                Lihat KTP
+                                            </a>
                                         </td>
+
                                         <td
                                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <img src="{{ Storage::url($request->image_selfie) }}" alt="Selfie Image"
-                                                class="h-24 w-auto rounded-md cursor-pointer"
-                                                wire:click="openModal('{{ Storage::url($request->image_selfie) }}')" />
+                                            <!-- Link for Selfie -->
+                                            <a href="#" class="text-blue-600 underline cursor-pointer"
+                                                wire:click="openModal('{{ Storage::url($request->image_selfie) }}')">
+                                                Lihat Selfie
+                                            </a>
                                         </td>
 
                                         <td class="p-4 space-x-2 whitespace-nowrap">
