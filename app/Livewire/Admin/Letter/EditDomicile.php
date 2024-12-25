@@ -13,6 +13,7 @@ class EditDomicile extends Component
     public $name;
     public $nik;
     public $gender;
+    public $birth_place;
     public $birth_date;
     public $nationality;
     public $religion;
@@ -29,6 +30,7 @@ class EditDomicile extends Component
         $this->name = $domicile->name;
         $this->nik = $domicile->nik;
         $this->gender = $domicile->gender;
+        $this->birth_place = $domicile->birth_place;
         $this->birth_date = $domicile->birth_date;
         $this->nationality = $domicile->nationality;
         $this->religion = $domicile->religion;
@@ -43,6 +45,7 @@ class EditDomicile extends Component
             'name' => 'required|string|max:255',
             'nik' => 'required|string|max:255',
             'gender' => 'required|string',
+            'birth_place' => 'required|string|max:255',
             'birth_date' => 'required|date',
             'nationality' => 'required|string|max:255',
             'religion' => 'required|string|max:255',
@@ -56,6 +59,7 @@ class EditDomicile extends Component
             'name' => $this->name,
             'nik' => $this->nik,
             'gender' => $this->gender,
+            'birth_place' => $this->birth_place,
             'birth_date' => $this->birth_date,
             'nationality' => $this->nationality,
             'religion' => $this->religion,
@@ -64,7 +68,7 @@ class EditDomicile extends Component
             'number_letter' => $this->number_letter,
         ]);
 
-        session()->flash('message', 'Data surat domisili berhasil diperbarui!');
+        session()->flash('success', 'Data surat domisili berhasil diperbarui!');
         return redirect()->route('admin.domicile-letter'); // Ganti sesuai dengan route index Anda
     }
 

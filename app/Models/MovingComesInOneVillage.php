@@ -12,6 +12,7 @@ class MovingComesInOneVillage extends Model
 
     protected $table = 'moving_comes_in_one_village';
     protected $fillable = [
+        'request_id',
         'number_letter',
         // Origin details
         'origin_family_card_number',
@@ -29,9 +30,12 @@ class MovingComesInOneVillage extends Model
         // Applicant details
         'applicant_nik',
         'applicant_full_name',
-        // Move reason
-        'reason_for_move',
+
         // Destination details
+        'destination_card_number_family',
+        'destination_nik_head_of_family',
+        'destination_name_head_of_family',
+        'destination_arrival_date',
         'destination_address',
         'destination_rt',
         'destination_rw',
@@ -41,15 +45,13 @@ class MovingComesInOneVillage extends Model
         'destination_regency',
         'destination_province',
         'destination_postal_code',
-        'destination_phone',
+
         // Move type and family card status
-        'move_type',
-        'kk_status_not_moving',
         'kk_status_moving',
     ];
     public function family()
     {
-        return $this->belongsTo(Family::class);  // Relasi ke tabel families
+        return $this->hasMany(Family::class, 'request_id');  // Relasi ke tabel families
     }
     public function request(): BelongsTo
     {

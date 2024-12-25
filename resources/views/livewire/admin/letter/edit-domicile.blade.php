@@ -1,5 +1,5 @@
-<div class="p-6 bg-white rounded-lg shadow-md">
-    <h2 class="text-2xl font-bold mb-4">Edit Data Domisili</h2>
+<div class="max-w-4xl mx-auto my-6  bg-white shadow-xl p-8  rounded-xl ">
+    <h2 class="text-2xl font-bold mb-4">Edit Data Surat Domisili</h2>
 
     @if (session()->has('message'))
         <div class="mb-4 text-green-500">

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('moving_comes_in_one_village', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('request_id')->constrained();
             $table->string('number_letter')->nullable();
             // Origin details
             $table->string('origin_family_card_number')->nullable();
@@ -33,9 +34,13 @@ return new class extends Migration
             $table->string('applicant_full_name')->nullable();
 
             // Move reason
-            $table->text('reason_for_move')->nullable();
+
 
             // Destination details
+            $table->string('destination_card_number_family')->nullable();
+            $table->string('destination_nik_head_of_family')->nullable();
+            $table->string('destination_name_head_of_family')->nullable();
+            $table->date('destination_arrival_date')->nullable();
             $table->text('destination_address')->nullable();
             $table->string('destination_rt')->nullable();
             $table->string('destination_rw')->nullable();
@@ -45,11 +50,11 @@ return new class extends Migration
             $table->string('destination_regency')->nullable();
             $table->string('destination_province')->nullable();
             $table->string('destination_postal_code')->nullable();
-            $table->string('destination_phone')->nullable();
+            // $table->string('destination_phone')->nullable();
 
             // Move type and family card status
-            $table->enum('move_type', ['Kepala Keluarga', 'Kepala Keluarga dan Semua Anggota', 'Kepala Keluarga dan Sebagai Anggota', 'Anggota Keluarga'])->nullable();
-            $table->enum('kk_status_not_moving', ['Numpang KK', 'Membuat KK Baru', 'Nomor KK Tetap'])->nullable();
+            // $table->enum('move_type', ['Kepala Keluarga', 'Kepala Keluarga dan Semua Anggota', 'Kepala Keluarga dan Sebagai Anggota', 'Anggota Keluarga'])->nullable();
+            // $table->enum('kk_status_not_moving', ['Numpang KK', 'Membuat KK Baru', 'Nomor KK Tetap'])->nullable();
             $table->enum('kk_status_moving', ['Numpang KK', 'Membuat KK Baru', 'Nomor KK Tetap'])->nullable();
 
             $table->timestamps(); // Created_at and updated_at

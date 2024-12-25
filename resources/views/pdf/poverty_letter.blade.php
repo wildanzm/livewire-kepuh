@@ -154,7 +154,9 @@
             </tr>
             <tr>
                 <td>Tempat, Tgl Lahir</td>
-                <td>: {{ $poverty->birth_place }}, {{ $poverty->birth_date }}</td>
+                <td>: {{ $poverty->birth_place }},
+                    {{ \Carbon\Carbon::parse($poverty->birth_date)->translatedFormat('j F Y') }}
+                </td>
             </tr>
             <tr>
                 <td>Warga Negara</td>
@@ -191,8 +193,8 @@
                         Kepuh, {{ now()->translatedFormat('j F Y') }}
                     </p>
                     <p class="signature-title">An. Kepala Desa Kepuh</p>
-                    <p class="signature-name">[Nama Kepala Desa]</p>
-                    <p class="signature-nip">NIP. [NIP Kepala Desa]</p>
+                    <p class="signature-name">...............</p>
+                    <p class="signature-nip">NIP. ...........</p>
                 </div>
             </td>
         </tr>

@@ -12,6 +12,7 @@ class DomicileLetter extends Model
         'nik',
         'name',
         'gender',
+        'birth_place',
         'birth_date',
         'nationality',
         'religion',

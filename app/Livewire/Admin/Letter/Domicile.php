@@ -4,11 +4,12 @@ namespace App\Livewire\Admin\Letter;
 
 use App\Models\Request;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use App\Models\DomicileLetter;
 use Livewire\Attributes\Title;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Layout;
 use Spatie\Browsershot\Browsershot;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class Domicile extends Component
 {
@@ -64,9 +65,12 @@ class Domicile extends Component
             ->setPaper('a4') // Set the paper size (optional)
             ->setOption('isHtml5ParserEnabled', true) // Optional settings
             ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
+        // Pastikan kolom nama surat ada di tabel
+        // Format nama surat untuk mencegah karakter tidak valid
+        $namaSurat = Str::slug($domicileLetter->name); // Menggunakan slug agar aman untuk nama file
 
         // Return the PDF as a download
-        $pdfFileName = "domicile-letter-{$id}.pdf";
+        $pdfFileName = "surat-domisili-{$namaSurat}.pdf";
         return $pdf->download($pdfFileName);
     }
 
@@ -81,9 +85,14 @@ class Domicile extends Component
             ->setOption('isHtml5ParserEnabled', true) // Optional settings
             ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
 
-        // Save the PDF to a specific directory
-        $pdfFileName = "domicile-letter-{$id}.pdf";
-        $filePath = ('pdf/' . $pdfFileName);
+        // Format nama surat untuk mencegah karakter tidak valid
+        $namaSurat = Str::slug($domicileLetter->name); // Menggunakan slug agar aman untuk nama file
+
+        // Tentukan nama file PDF
+        $pdfFileName = "surat-domisili-{$namaSurat}.pdf";
+
+        // Simpan file ke dalam folder 'storage/app/public/pdf'
+        $filePath = storage_path("app/public/pdf/{$pdfFileName}");
         $pdf->save($filePath);
 
 

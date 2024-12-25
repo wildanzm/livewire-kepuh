@@ -4,7 +4,8 @@
             class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="w-full mb-1">
                 <div class="mb-4">
-                    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Permintaan Surat Domisili
+                    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Permintaan Surat Pindah
+                        Datang Dalam Satu Desa
                     </h1>
                 </div>
                 <div>
@@ -27,11 +28,10 @@
                 <div class="sm:flex">
                     <div
                         class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
-                        <form class="lg:pr-3">
+                        <form class="lg:pr-3" action="#" method="GET">
                             <label for="users-search" class="sr-only">Search</label>
                             <div class="relative mt-1 lg:w-64 xl:w-96">
                                 <input type="text" name="email" id="users-search"
-                                    wire:model.debounce.300ms="search"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Cari...">
                             </div>
@@ -91,7 +91,7 @@
                                         </td>
                                         <td
                                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $request->domicileLetter->name ?? 'Data tidak tersedia' }}
+                                            {{ $request->MovingComesInOneVillageLetter->applicant_full_name ?? 'Data tidak tersedia' }}
                                         </td>
                                         <td
                                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -99,8 +99,9 @@
                                         </td>
                                         <td
                                             class="p-4 text-base font-medium text-gray-900 break-words whitespace-normal dark:text-white">
-                                            {{ $request->domicileLetter->number_letter ?? 'Belum ada nomor surat. Edit data untuk menambahkan nomor surat.' }}
+                                            {{ $request->MovingComesInOneVillageLetter->number_letter ?? 'Belum ada nomor surat. Edit data untuk menambahkan nomor surat.' }}
                                         </td>
+
                                         <!-- Thumbnail Images -->
                                         <td
                                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -123,27 +124,25 @@
                                         <td class="p-4 space-x-2 whitespace-nowrap">
                                             <div class="flex flex-col gap-3">
 
-
-
-
-                                                @if ($request->domicileLetter)
-                                                    <a href="{{ route('admin.domicile-letter.download', $request->domicileLetter->id) }}"
+                                                @if ($request->MovingComesInOneVillageLetter)
+                                                    <a href="{{ route('admin.moving-one-village-letter.download', $request->MovingComesInOneVillageLetter->id) }}"
                                                         class="flex flex-column items-center justify-center  py-2 px-2 text-sm font-medium text-white bg-amber-700 rounded-lg hover:bg-amber-800 focus:ring-4 focus:ring-amber-300 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800 ease-in-out duration-300">
                                                         <span class="mr-2">Download</span>
                                                         <x-grommet-document-download class="w-5 " />
                                                     </a>
-                                                    <a href="{{ route('admin.domicile-letter.streamPDF', $request->domicileLetter->id) }}"
+                                                    <a href="{{ route('admin.moving-one-village-letter.streamPDF', $request->MovingComesInOneVillageLetter->id) }}"
                                                         class="flex flex-column items-center justify-center  py-2 px-2 text-sm font-medium text-white bg-cyan-700 rounded-lg hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800 ease-in-out duration-300"
                                                         target="_blank">
                                                         <span class="mr-2">Stream</span>
                                                         <x-iconpark-previewopen-o class="w-5" />
                                                     </a>
-                                                    <a href="{{ route('admin.domicile.edit', $request->domicileLetter->id) }}"
+                                                    <a href="{{ route('admin.moving-one-village.edit', $request->MovingComesInOneVillageLetter->id) }}"
                                                         class="flex flex-column items-center justify-center  py-2 px-2 text-sm font-medium text-white bg-yellow-400 rounded-lg hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 ease-in-out duration-300">
                                                         <span class="mr-2">Edit</span>
                                                         <x-feathericon-edit class="w-5 " /> </a>
                                                 @endif
                                             </div>
+
                                         </td>
                                     </tr>
                                 @endforeach

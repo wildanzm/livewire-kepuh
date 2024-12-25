@@ -157,9 +157,13 @@ class AdminRequestComponent extends Component
                     ['name' => 'applicant_full_name', 'type' => 'text', 'label' => 'Nama Lengkap Pemohon', 'placeholder' => 'Masukkan nama lengkap pemohon'],
 
                     // Move reason
-                    ['name' => 'reason_for_move', 'type' => 'textarea', 'label' => 'Alasan Pindah', 'placeholder' => 'Masukkan alasan pindah'],
+
 
                     // Destination details
+                    ['name' => 'destination_card_number_family', 'type' => 'number', 'label' => 'Nomor Kartu Keluarga Tujuan', 'placeholder' => 'Masukkan nomor kartu keluarga tujua'],
+                    ['name' => 'destination_nik_head_of_family', 'type' => 'number', 'label' => 'Nik Kepala Keluarga Tujuan', 'placeholder' => 'Masukkan nik kepala keluarga tujuan'],
+                    ['name' => 'destination_name_head_of_family', 'type' => 'text', 'label' => 'Nama Kepala Keluarga Tujuan', 'placeholder' => 'Masukkan nama kepala keluarga tujuan'],
+                    ['name' => 'destination_arrival_date', 'type' => 'date', 'label' => 'Tanggal Kedatangan', 'placeholder' => 'Masukkan tanggal kedatangan'],
                     ['name' => 'destination_address', 'type' => 'textarea', 'label' => 'Alamat Tujuan', 'placeholder' => 'Masukkan alamat tujuan lengkap'],
                     ['name' => 'destination_rt', 'type' => 'number', 'label' => 'RT Tujuan', 'placeholder' => 'Masukkan RT tujuan'],
                     ['name' => 'destination_rw', 'type' => 'number', 'label' => 'RW Tujuan', 'placeholder' => 'Masukkan RW tujuan'],
@@ -169,11 +173,9 @@ class AdminRequestComponent extends Component
                     ['name' => 'destination_regency', 'type' => 'text', 'label' => 'Kabupaten Tujuan', 'placeholder' => 'Masukkan kabupaten tujuan'],
                     ['name' => 'destination_province', 'type' => 'text', 'label' => 'Provinsi Tujuan', 'placeholder' => 'Masukkan provinsi tujuan'],
                     ['name' => 'destination_postal_code', 'type' => 'number', 'label' => 'Kode Pos Tujuan', 'placeholder' => 'Masukkan kode pos tujuan'],
-                    ['name' => 'destination_phone', 'type' => 'number', 'label' => 'Telepon Tujuan', 'placeholder' => 'Masukkan nomor telepon tujuan'],
+
 
                     // Move type and family card status
-                    ['name' => 'move_type', 'type' => 'select', 'label' => 'Jenis Kepindahan', 'options' => ['Kepala Keluarga', 'Kepala Keluarga dan Semua Anggota', 'Kepala Keluarga dan Sebagai Anggota', 'Anggota Keluarga']],
-                    ['name' => 'kk_status_not_moving', 'type' => 'select', 'label' => 'Status KK Tidak Pindah', 'options' => ['Numpang KK', 'Membuat KK Baru', 'Nomor KK Tetap']],
                     ['name' => 'kk_status_moving', 'type' => 'select', 'label' => 'Status KK Pindah', 'options' => ['Numpang KK', 'Membuat KK Baru', 'Nomor KK Tetap']],
                 ];
                 break;
@@ -183,6 +185,7 @@ class AdminRequestComponent extends Component
                         ['name' => 'name', 'type' => 'text', 'label' => 'Nama', 'placeholder' => 'Masukkan nama'],
                         ['name' => 'nik', 'type' => 'number', 'label' => 'NIK', 'placeholder' => 'Masukkan NIK'],
                         ['name' => 'gender', 'type' => 'select', 'label' => 'Jenis Kelamin', 'options' => ['Laki-laki', 'Perempuan']],
+                        ['name' => 'birth_place', 'type' => 'text', 'label' => 'Tempat Lahir', 'placeholder' => 'Masukkan tempat lahir'],
                         ['name' => 'birth_date', 'type' => 'date', 'label' => 'Tanggal Lahir', 'placeholder' => ''],
                         ['name' => 'nationality', 'type' => 'text', 'label' => 'Kewarganegaraan', 'placeholder' => 'Masukkan kewarganegaraan'],
                         ['name' => 'religion', 'type' => 'text', 'label' => 'Agama', 'placeholder' => 'Masukkan agama'],
@@ -290,7 +293,7 @@ class AdminRequestComponent extends Component
     public function render()
     {
         return view('livewire.admin.admin-request-component', [
-            'typeLetters' => TypeLetter::whereIn('id', [1, 3])->get(),
+            'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3])->get(),
         ]);
     }
 }

@@ -69,14 +69,15 @@
 
 
     <x-dialog z-index="z-50" blur="md" align="center" />
+    <x-notifications position="top-end" positive />
     @wireUiScripts
     @livewireScripts
     @livewireChartsScripts
 
-    {{-- <script src="https://flowbite-admin-dashboard.vercel.app//app.bundle.js"></script>
+    <script src="https://flowbite-admin-dashboard.vercel.app//app.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
         integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
