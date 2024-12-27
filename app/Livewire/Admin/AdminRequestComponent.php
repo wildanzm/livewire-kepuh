@@ -2,8 +2,11 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\BirthLetter;
+use App\Models\BusinessLetter;
 use App\Models\Family;
 use App\Models\Request;
+use App\Models\VillageLetter;
 use Livewire\Component;
 use App\Models\TypeLetter;
 use App\Models\PovertyLetter;
@@ -193,7 +196,98 @@ class AdminRequestComponent extends Component
                         ['name' => 'address', 'type' => 'textarea', 'label' => 'Alamat', 'placeholder' => 'Masukkan alamat lengkap'],
                     ];
                 break;
+            case 4: // domicille Letter
+                $this->formFields =
+                    [
+                        ['name' => 'nik', 'type' => 'number', 'label' => 'NIK', 'placeholder' => 'Masukkan NIK'],
+                        ['name' => 'name', 'type' => 'text', 'label' => 'Nama', 'placeholder' => 'Masukkan nama'],
+                        ['name' => 'birth_place', 'type' => 'text', 'label' => 'Tempat Lahir', 'placeholder' => 'Masukkan tempat lahir'],
+                        ['name' => 'birth_date', 'type' => 'date', 'label' => 'Tanggal Lahir', 'placeholder' => ''],
+                        ['name' => 'gender', 'type' => 'select', 'label' => 'Jenis Kelamin', 'options' => ['Laki-laki', 'Perempuan']],
+                        ['name' => 'religion', 'type' => 'text', 'label' => 'Agama', 'placeholder' => 'Masukkan agama'],
+                        ['name' => 'occupation', 'type' => 'text', 'label' => 'Pekerjaan', 'placeholder' => 'Masukkan pekerjaan'],
+                        ['name' => 'address', 'type' => 'textarea', 'label' => 'Alamat', 'placeholder' => 'Masukkan alamat lengkap'],
+                        ['name' => 'marital_status', 'type' => 'select', 'label' => 'Status Pernikahan', 'options' => ['Belum Menikah', 'Menikah', 'Cerai']],
+                        ['name' => 'business_name', 'type' => 'text', 'label' => 'Nama Usaha', 'placeholder' => 'Masukkan nama usaha'],
+                        ['name' => 'business_type', 'type' => 'text', 'label' => 'Jenis Usaha', 'placeholder' => 'Masukkan jenis usaha'],
+                        ['name' => 'business_address', 'type' => 'textarea', 'label' => 'Alamat Usaha', 'placeholder' => 'Masukkan alamat usaha'],
+                    ];
+                break;
+            case 5: // domicille Letter
+                $this->formFields = [
+                    ['name' => 'family_head_name', 'type' => 'text', 'label' => 'Nama Kepala Keluarga', 'placeholder' => 'Masukkan Nama Kepala Keluarga'],
+                    ['name' => 'family_card_number', 'type' => 'number', 'label' => 'Nomor KK', 'placeholder' => 'Masukkan Nomor KK'],
 
+                    // Data Bayi
+                    ['name' => 'baby_name', 'type' => 'text', 'label' => 'Nama Bayi', 'placeholder' => 'Masukkan Nama Bayi'],
+                    ['name' => 'baby_gender', 'type' => 'select', 'label' => 'Jenis Kelamin Bayi', 'options' => ['Laki-laki', 'Perempuan']],
+                    ['name' => 'birth_date', 'type' => 'date', 'label' => 'Tanggal Lahir', 'placeholder' => ''],
+                    ['name' => 'birth_time', 'type' => 'time', 'label' => 'Waktu Lahir', 'placeholder' => 'Masukkan Waktu Lahir'],
+                    ['name' => 'birth_order', 'type' => 'number', 'label' => 'Anak Ke-', 'placeholder' => 'Masukkan Urutan Kelahiran'],
+                    ['name' => 'birth_helper', 'type' => 'text', 'label' => 'Penolong Kelahiran', 'placeholder' => 'Masukkan Penolong Kelahiran'],
+                    ['name' => 'baby_weight', 'type' => 'number', 'label' => 'Berat Bayi (kg)', 'placeholder' => 'Masukkan Berat Bayi'],
+                    ['name' => 'baby_length', 'type' => 'number', 'label' => 'Panjang Bayi (cm)', 'placeholder' => 'Masukkan Panjang Bayi'],
+
+                    // Data Ibu
+                    ['name' => 'mother_nik', 'type' => 'number', 'label' => 'NIK Ibu', 'placeholder' => 'Masukkan NIK Ibu'],
+                    ['name' => 'mother_name', 'type' => 'text', 'label' => 'Nama Ibu', 'placeholder' => 'Masukkan Nama Ibu'],
+                    ['name' => 'mother_birth_date', 'type' => 'date', 'label' => 'Tanggal Lahir Ibu', 'placeholder' => ''],
+                    ['name' => 'mother_age', 'type' => 'number', 'label' => 'Usia Ibu', 'placeholder' => 'Masukkan Usia Ibu'],
+                    ['name' => 'mother_occupation', 'type' => 'text', 'label' => 'Pekerjaan Ibu', 'placeholder' => 'Masukkan Pekerjaan Ibu'],
+                    ['name' => 'mother_address', 'type' => 'textarea', 'label' => 'Alamat Ibu', 'placeholder' => 'Masukkan Alamat Ibu'],
+                    ['name' => 'mother_nationality', 'type' => 'text', 'label' => 'Kewarganegaraan Ibu', 'placeholder' => 'Masukkan Kewarganegaraan Ibu'],
+                    ['name' => 'mother_ethnicity', 'type' => 'text', 'label' => 'Suku Ibu', 'placeholder' => 'Masukkan Suku Ibu'],
+                    ['name' => 'mother_marriage_date', 'type' => 'date', 'label' => 'Tanggal Pernikahan Ibu', 'placeholder' => ''],
+
+                    // Data Ayah
+                    ['name' => 'father_nik', 'type' => 'number', 'label' => 'NIK Ayah', 'placeholder' => 'Masukkan NIK Ayah'],
+                    ['name' => 'father_name', 'type' => 'text', 'label' => 'Nama Ayah', 'placeholder' => 'Masukkan Nama Ayah'],
+                    ['name' => 'father_birth_date', 'type' => 'date', 'label' => 'Tanggal Lahir Ayah', 'placeholder' => ''],
+                    ['name' => 'father_age', 'type' => 'number', 'label' => 'Usia Ayah', 'placeholder' => 'Masukkan Usia Ayah'],
+                    ['name' => 'father_occupation', 'type' => 'text', 'label' => 'Pekerjaan Ayah', 'placeholder' => 'Masukkan Pekerjaan Ayah'],
+                    ['name' => 'father_address', 'type' => 'textarea', 'label' => 'Alamat Ayah', 'placeholder' => 'Masukkan Alamat Ayah'],
+                    ['name' => 'father_nationality', 'type' => 'text', 'label' => 'Kewarganegaraan Ayah', 'placeholder' => 'Masukkan Kewarganegaraan Ayah'],
+                    ['name' => 'father_ethnicity', 'type' => 'text', 'label' => 'Suku Ayah', 'placeholder' => 'Masukkan Suku Ayah'],
+                    ['name' => 'father_marriage_date', 'type' => 'date', 'label' => 'Tanggal Pernikahan Ayah', 'placeholder' => ''],
+
+                    // Data Pelapor
+                    ['name' => 'reporter_nik', 'type' => 'number', 'label' => 'NIK Pelapor', 'placeholder' => 'Masukkan NIK Pelapor'],
+                    ['name' => 'reporter_name', 'type' => 'text', 'label' => 'Nama Pelapor', 'placeholder' => 'Masukkan Nama Pelapor'],
+                    ['name' => 'reporter_age', 'type' => 'number', 'label' => 'Usia Pelapor', 'placeholder' => 'Masukkan Usia Pelapor'],
+                    ['name' => 'reporter_gender', 'type' => 'select', 'label' => 'Jenis Kelamin Pelapor', 'options' => ['Laki-laki', 'Perempuan']],
+                    ['name' => 'reporter_occupation', 'type' => 'text', 'label' => 'Pekerjaan Pelapor', 'placeholder' => 'Masukkan Pekerjaan Pelapor'],
+                    ['name' => 'reporter_address', 'type' => 'textarea', 'label' => 'Alamat Pelapor', 'placeholder' => 'Masukkan Alamat Pelapor'],
+
+                    // Data Saksi 1
+                    ['name' => 'witness1_nik', 'type' => 'number', 'label' => 'NIK Saksi 1', 'placeholder' => 'Masukkan NIK Saksi 1'],
+                    ['name' => 'witness1_name', 'type' => 'text', 'label' => 'Nama Saksi 1', 'placeholder' => 'Masukkan Nama Saksi 1'],
+                    ['name' => 'witness1_age', 'type' => 'number', 'label' => 'Usia Saksi 1', 'placeholder' => 'Masukkan Usia Saksi 1'],
+                    ['name' => 'witness1_occupation', 'type' => 'text', 'label' => 'Pekerjaan Saksi 1', 'placeholder' => 'Masukkan Pekerjaan Saksi 1'],
+                    ['name' => 'witness1_address', 'type' => 'textarea', 'label' => 'Alamat Saksi 1', 'placeholder' => 'Masukkan Alamat Saksi 1'],
+
+                    // Data Saksi 2
+                    ['name' => 'witness2_nik', 'type' => 'number', 'label' => 'NIK Saksi 2', 'placeholder' => 'Masukkan NIK Saksi 2'],
+                    ['name' => 'witness2_name', 'type' => 'text', 'label' => 'Nama Saksi 2', 'placeholder' => 'Masukkan Nama Saksi 2'],
+                    ['name' => 'witness2_age', 'type' => 'number', 'label' => 'Usia Saksi 2', 'placeholder' => 'Masukkan Usia Saksi 2'],
+                    ['name' => 'witness2_occupation', 'type' => 'text', 'label' => 'Pekerjaan Saksi 2', 'placeholder' => 'Masukkan Pekerjaan Saksi 2'],
+                    ['name' => 'witness2_address', 'type' => 'textarea', 'label' => 'Alamat Saksi 2', 'placeholder' => 'Masukkan Alamat Saksi 2'],
+                ];
+                break;
+            case 6: // domicille Letter
+                $this->formFields =
+                    [
+                        ['name' => 'sppt_number', 'type' => 'text', 'label' => 'Nomor SPPT', 'placeholder' => 'Masukkan nomor SPPT'],
+                        ['name' => 'persil_number', 'type' => 'text', 'label' => 'Nomor Persil', 'placeholder' => 'Masukkan nomor persil'],
+                        ['name' => 'kohir_number', 'type' => 'text', 'label' => 'Nomor Kohir', 'placeholder' => 'Masukkan nomor kohir'],
+                        ['name' => 'class', 'type' => 'text', 'label' => 'Kelas', 'placeholder' => 'Masukkan kelas'],
+                        ['name' => 'land_area', 'type' => 'number', 'label' => 'Luas Tanah (m²)', 'placeholder' => 'Masukkan luas tanah'],
+                        ['name' => 'land_owner', 'type' => 'text', 'label' => 'Pemilik Tanah', 'placeholder' => 'Masukkan nama pemilik tanah'],
+                        ['name' => 'north_border', 'type' => 'text', 'label' => 'Batas Utara', 'placeholder' => 'Masukkan batas utara'],
+                        ['name' => 'east_border', 'type' => 'text', 'label' => 'Batas Timur', 'placeholder' => 'Masukkan batas timur'],
+                        ['name' => 'south_border', 'type' => 'text', 'label' => 'Batas Selatan', 'placeholder' => 'Masukkan batas selatan'],
+                        ['name' => 'west_border', 'type' => 'text', 'label' => 'Batas Barat', 'placeholder' => 'Masukkan batas barat'],
+                    ];
+                break;
             default:
                 $this->formFields = [];
                 break;
@@ -261,6 +355,12 @@ class AdminRequestComponent extends Component
                     'shdk' => $familyMember['shdk'],
                 ]);
             }
+        } elseif ($this->type_letter_id == 4) {
+            BusinessLetter::create($data);
+        } elseif ($this->type_letter_id == 5) {
+            BirthLetter::create($data);
+        } elseif ($this->type_letter_id == 6) {
+            VillageLetter::create($data);
         }
 
         $this->reset();
@@ -293,7 +393,7 @@ class AdminRequestComponent extends Component
     public function render()
     {
         return view('livewire.admin.admin-request-component', [
-            'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3])->get(),
+            'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3, 4, 5, 6])->get(),
         ]);
     }
 }

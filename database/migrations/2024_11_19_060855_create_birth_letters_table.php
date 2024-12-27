@@ -49,16 +49,16 @@ return new class extends Migration
             $table->enum('reporter_gender', ['Laki-Laki', 'Perempuan']);
             $table->string('reporter_occupation');
             $table->text('reporter_address');
-            $table->string('witness1_nik');
-            $table->string('witness1_name');
-            $table->integer('witness1_age');
-            $table->string('witness1_occupation');
-            $table->text('witness1_address');
-            $table->string('witness2_nik');
-            $table->string('witness2_name');
-            $table->integer('witness2_age');
-            $table->string('witness2_occupation');
-            $table->text('witness2_address');
+            $table->string('witness1_nik')->nullable();
+            $table->string('witness1_name')->nullable();
+            $table->integer('witness1_age')->nullable();
+            $table->string('witness1_occupation')->nullable();
+            $table->text('witness1_address')->nullable();
+            $table->string('witness2_nik')->nullable();
+            $table->string('witness2_name')->nullable();
+            $table->integer('witness2_age')->nullable();
+            $table->string('witness2_occupation')->nullable();
+            $table->text('witness2_address')->nullable();
             $table->timestamps();
         });
     }

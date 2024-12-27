@@ -43,7 +43,7 @@
                     <div>
                         <label for="{{ $field['name'] }}"
                             class="block text-sm font-medium text-gray-700">{{ $field['label'] }}</label>
-                        @if ($field['type'] === 'text' || $field['type'] === 'date' || $field['type'] === 'number')
+                        @if ($field['type'] === 'text' || $field['type'] === 'date' || $field['type'] === 'number' || $field['type'] === 'time')
                             <input type="{{ $field['type'] }}" wire:model="formFieldsValues.{{ $field['name'] }}"
                                 id="{{ $field['name'] }}"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
