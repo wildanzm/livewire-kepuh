@@ -1,5 +1,5 @@
 <div class="max-w-4xl mx-auto my-6  bg-white shadow-xl p-8  rounded-xl ">
-    <h2 class="text-2xl font-bold mb-4">Edit Data Surat Keterangan Usaha</h2>
+    <h2 class="text-2xl font-bold mb-4">Edit Data Surat Desa</h2>
 
     @if (session()->has('message'))
         <div class="mb-4 text-green-500">
@@ -8,7 +8,7 @@
     @endif
 
     <form wire:submit.prevent="update">
-        @foreach ([['number_letter', 'Nomor Surat', 'text'], ['nik', 'NIK', 'number'], ['name', 'Nama', 'text'], ['birth_place', 'Tempat Lahir', 'text'], ['birth_date', 'Tanggal Lahir', 'date'], ['religion', 'Agama', 'text'], ['occupation', 'Pekerjaan', 'text'], ['address', 'Alamat', 'textarea'], ['marital_status', 'Status Pernikahan', 'text'], ['business_name', 'Nama Usaha', 'text'], ['business_type', 'Jenis Usaha', 'text'], ['business_address', 'Alamat Usaha', 'textarea']] as $field)
+        @foreach ([['number_letter', 'Nomor Surat', 'text'], ['sppt_number', 'Nomor SPPT', 'text'], ['persil_number', 'Nomor Persil', 'text'], ['kohir_number', 'Nomor Kohir', 'text'], ['class', 'Kelas', 'text'], ['land_area', 'Luas Tanah', 'number'], ['land_owner', 'Nama Pemilik Tanah', 'text'], ['north_border', 'Batas Utara', 'text'], ['east_border', 'Batas Timur', 'text'], ['south_border', 'Batas Selatan', 'text'], ['west_border', 'Batas Barat', 'text']] as $field)
             <div class="mb-4">
                 <label for="{{ $field[0] }}"
                     class="block text-sm font-medium text-gray-700">{{ $field[1] }}</label>
@@ -25,7 +25,7 @@
             </div>
         @endforeach
 
-        {{-- Dropdown untuk Gender --}}
+        {{-- Dropdown untuk Gender
         <div class="mb-4">
             <label for="gender" class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
             <select id="gender" wire:model="gender"
@@ -37,12 +37,12 @@
             @error('gender')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
-        </div>
+        </div> --}}
 
         <div class="flex justify-end">
             <button type="submit"
                 class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Simpan</button>
-            <a href="{{ route('admin.bussines-letter') }}"
+            <a href="{{ route('admin.village-letter') }}"
                 class="ml-4 px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">Batal</a>
         </div>
     </form>

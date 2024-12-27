@@ -4,7 +4,9 @@
 
 use App\Http\Controllers\Admin\DomicileController;
 use App\Livewire\Admin\AdminRequestComponent;
+use App\Livewire\Admin\Letter\BirthLetter;
 use App\Livewire\Admin\Letter\BusinessLetter;
+use App\Livewire\Admin\Letter\EditBirthLetter;
 use App\Livewire\Admin\Letter\EditBusinessLetter;
 use App\Livewire\Admin\Letter\EditDomicile;
 use App\Livewire\Admin\Letter\EditMovingComesOneVillage;
@@ -17,9 +19,11 @@ use App\Livewire\Admin\UserRequestComponent;
 use App\Livewire\Admin\Letter\Domicile;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\Letter\EditPoverty;
+use App\Livewire\Admin\Letter\EditVillageLetter;
 use App\Livewire\Admin\WaterDebit;
 use App\Livewire\Index;
 use App\Livewire\User\RequestDashboard;
+use App\Models\VillageLetter;
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // Route untuk halaman permintaan surat
@@ -40,7 +44,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/moving-one-village-letter', MovingComesOneVillage::class)->name('moving-one-village-letter');
     Route::get('/moving-one-village-letter/edit/{id}', EditMovingComesOneVillage::class)->name('moving-one-village.edit');
     Route::get('/bussines-letter/edit/{id}', EditBusinessLetter::class)->name('bussines-letter.edit');
+    Route::get('/birth-letter/edit/{id}', EditBirthLetter::class)->name('birth-letter.edit');
+    Route::get('/village-letter/edit/{id}',  EditVillageLetter::class)->name('village-letter.edit');
     Route::get('/bussines-letter', BusinessLetter::class)->name('bussines-letter');
+    Route::get('/birth-letter', BirthLetter::class)->name('birth-letter');
+    Route::get('/village-letter', \App\Livewire\Admin\Letter\VillageLetter::class)->name('village-letter');
     Route::get('/water-debit', WaterDebit::class)->name('water');
 });
 

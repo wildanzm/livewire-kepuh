@@ -4,8 +4,7 @@
             class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="w-full mb-1">
                 <div class="mb-4">
-                    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Permintaan Surat
-                        Keterangan Usaha
+                    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Permintaan Surat Desa
                     </h1>
                 </div>
                 <div>
@@ -92,7 +91,7 @@
                                         </td>
                                         <td
                                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $request->businessLetter->name ?? 'Data tidak tersedia' }}
+                                            {{ $request->villageLetter->land_owner ?? 'Data tidak tersedia' }}
                                         </td>
                                         <td
                                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -100,7 +99,7 @@
                                         </td>
                                         <td
                                             class="p-4 text-base font-medium text-gray-900 break-words whitespace-normal dark:text-white">
-                                            {{ $request->businessLetter->number_letter ?? 'Belum ada nomor surat. Edit data untuk menambahkan nomor surat.' }}
+                                            {{ $request->villageLetter->number_letter ?? 'Belum ada nomor surat. Edit data untuk menambahkan nomor surat.' }}
                                         </td>
                                         <!-- Thumbnail Images -->
                                         <td
@@ -127,7 +126,7 @@
 
 
 
-                                                @if ($request->businessLetter)
+                                                @if ($request->villageLetter)
                                                     <a href=""
                                                         class="flex flex-column items-center justify-center  py-2 px-2 text-sm font-medium text-white bg-amber-700 rounded-lg hover:bg-amber-800 focus:ring-4 focus:ring-amber-300 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800 ease-in-out duration-300">
                                                         <span class="mr-2">Download</span>
@@ -139,7 +138,7 @@
                                                         <span class="mr-2">Stream</span>
                                                         <x-iconpark-previewopen-o class="w-5" />
                                                     </a>
-                                                    <a href="{{ route('admin.bussines-letter.edit', $request->businessLetter->id) }}"
+                                                    <a href="{{ route('admin.village-letter.edit', $request->villageLetter->id) }}"
                                                         class="flex flex-column items-center justify-center  py-2 px-2 text-sm font-medium text-white bg-yellow-400 rounded-lg hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 ease-in-out duration-300">
                                                         <span class="mr-2">Edit</span>
                                                         <x-feathericon-edit class="w-5 " /> </a>

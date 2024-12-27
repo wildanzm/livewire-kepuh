@@ -7,10 +7,10 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 
-class BusinessLetter extends Component
+class VillageLetter extends Component
 {
     #[Layout('layouts.admin')]
-    #[Title('Surat Keterangan Usaha | Desa Kepuh')]
+    #[Title('Akta Kelahiran | Desa Kepuh')]
 
     public $letters;
     public $isModalOpen = false;
@@ -21,7 +21,7 @@ class BusinessLetter extends Component
     {
 
         $requests = Request::whereHas('typeLetter', function ($query) {
-            $query->where('name', 'Surat Keterangan Usaha');
+            $query->where('name', 'Surat Desa');
         })
             ->where('request_status_id', 5)
             ->when($this->search, function ($query) {
@@ -30,7 +30,7 @@ class BusinessLetter extends Component
             })
             ->get();
 
-        return view('livewire.admin.letter.business-letter', [
+        return view('livewire.admin.letter.village-letter', [
             'requests' => $requests,
         ]);
     }
