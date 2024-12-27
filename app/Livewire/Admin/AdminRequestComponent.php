@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\BusinessLetter;
 use App\Models\Family;
 use App\Models\Request;
 use Livewire\Component;
@@ -192,6 +193,22 @@ class AdminRequestComponent extends Component
                         ['name' => 'occupation', 'type' => 'text', 'label' => 'Pekerjaan', 'placeholder' => 'Masukkan pekerjaan'],
                         ['name' => 'address', 'type' => 'textarea', 'label' => 'Alamat', 'placeholder' => 'Masukkan alamat lengkap'],
                     ];
+            case 4: // domicille Letter
+                $this->formFields =
+                    [
+                        ['name' => 'nik', 'type' => 'number', 'label' => 'NIK', 'placeholder' => 'Masukkan NIK'],
+                        ['name' => 'name', 'type' => 'text', 'label' => 'Nama', 'placeholder' => 'Masukkan nama'],
+                        ['name' => 'birth_place', 'type' => 'text', 'label' => 'Tempat Lahir', 'placeholder' => 'Masukkan tempat lahir'],
+                        ['name' => 'birth_date', 'type' => 'date', 'label' => 'Tanggal Lahir', 'placeholder' => ''],
+                        ['name' => 'gender', 'type' => 'select', 'label' => 'Jenis Kelamin', 'options' => ['Laki-laki', 'Perempuan']],
+                        ['name' => 'religion', 'type' => 'text', 'label' => 'Agama', 'placeholder' => 'Masukkan agama'],
+                        ['name' => 'occupation', 'type' => 'text', 'label' => 'Pekerjaan', 'placeholder' => 'Masukkan pekerjaan'],
+                        ['name' => 'address', 'type' => 'textarea', 'label' => 'Alamat', 'placeholder' => 'Masukkan alamat lengkap'],
+                        ['name' => 'marital_status', 'type' => 'select', 'label' => 'Status Pernikahan', 'options' => ['Belum Menikah', 'Menikah', 'Cerai']],
+                        ['name' => 'business_name', 'type' => 'text', 'label' => 'Nama Usaha', 'placeholder' => 'Masukkan nama usaha'],
+                        ['name' => 'business_type', 'type' => 'text', 'label' => 'Jenis Usaha', 'placeholder' => 'Masukkan jenis usaha'],
+                        ['name' => 'business_address', 'type' => 'textarea', 'label' => 'Alamat Usaha', 'placeholder' => 'Masukkan alamat usaha'],
+                    ];
                 break;
 
             default:
@@ -261,6 +278,8 @@ class AdminRequestComponent extends Component
                     'shdk' => $familyMember['shdk'],
                 ]);
             }
+        } elseif ($this->type_letter_id == 4) {
+            BusinessLetter::create($data);
         }
 
         $this->reset();
@@ -293,7 +312,7 @@ class AdminRequestComponent extends Component
     public function render()
     {
         return view('livewire.admin.admin-request-component', [
-            'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3])->get(),
+            'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3, 4])->get(),
         ]);
     }
 }

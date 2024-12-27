@@ -4,6 +4,8 @@
 
 use App\Http\Controllers\Admin\DomicileController;
 use App\Livewire\Admin\AdminRequestComponent;
+use App\Livewire\Admin\Letter\BusinessLetter;
+use App\Livewire\Admin\Letter\EditBusinessLetter;
 use App\Livewire\Admin\Letter\EditDomicile;
 use App\Livewire\Admin\Letter\EditMovingComesOneVillage;
 use App\Livewire\Admin\Letter\MovingComesOneVillage;
@@ -37,6 +39,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/poverty/edit/{id}', action: EditPoverty::class)->name('poverty.edit');
     Route::get('/moving-one-village-letter', MovingComesOneVillage::class)->name('moving-one-village-letter');
     Route::get('/moving-one-village-letter/edit/{id}', EditMovingComesOneVillage::class)->name('moving-one-village.edit');
+    Route::get('/bussines-letter/edit/{id}', EditBusinessLetter::class)->name('bussines-letter.edit');
+    Route::get('/bussines-letter', BusinessLetter::class)->name('bussines-letter');
     Route::get('/water-debit', WaterDebit::class)->name('water');
 });
 
