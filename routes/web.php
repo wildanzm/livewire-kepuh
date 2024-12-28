@@ -33,9 +33,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/domicile-letter/{id}/download', [Domicile::class, 'downloadPDF'])->name('domicile-letter.download');
     Route::get('/poverty-letter/{id}/download', [Poverty::class, 'downloadPDF'])->name('poverty-letter.download');
     Route::get('/moving-one-village-letter/{id}/download', [MovingComesOneVillage::class, 'downloadPDF'])->name('moving-one-village-letter.download');
+    Route::get('/business-letter/{id}/download', [BusinessLetter::class, 'downloadPDF'])->name('business-letter.download');
+
+
     Route::get('/moving-one-village-letter/{id}/preview', [MovingComesOneVillage::class, 'streamPDF'])->name('moving-one-village-letter.streamPDF');
     Route::get('/domicile-letter/{id}/preview', [Domicile::class, 'streamPDF'])->name('domicile-letter.streamPDF');
     Route::get('/poverty-letter/{id}/preview', [Poverty::class, 'streamPDF'])->name('poverty-letter.streamPDF');
+    Route::get('/business-letter/{id}/preview', [BusinessLetter::class, 'streamPDF'])->name('business-letter.streamPDF');
 
     Route::get('/domicile-letter', Domicile::class)->name('domicile-letter');
     Route::get('/domicile-letter/edit/{id}', EditDomicile::class)->name('domicile.edit');

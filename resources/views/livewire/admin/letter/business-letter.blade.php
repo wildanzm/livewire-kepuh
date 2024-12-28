@@ -128,12 +128,12 @@
 
 
                                                 @if ($request->businessLetter)
-                                                    <a href=""
+                                                    <a href="{{ route('admin.business-letter.download', $request->businessLetter->id) }}"
                                                         class="flex flex-column items-center justify-center  py-2 px-2 text-sm font-medium text-white bg-amber-700 rounded-lg hover:bg-amber-800 focus:ring-4 focus:ring-amber-300 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800 ease-in-out duration-300">
                                                         <span class="mr-2">Download</span>
                                                         <x-grommet-document-download class="w-5 " />
                                                     </a>
-                                                    <a href=""
+                                                    <a href="{{ route('admin.business-letter.streamPDF', $request->businessLetter->id) }}"
                                                         class="flex flex-column items-center justify-center  py-2 px-2 text-sm font-medium text-white bg-cyan-700 rounded-lg hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800 ease-in-out duration-300"
                                                         target="_blank">
                                                         <span class="mr-2">Stream</span>
