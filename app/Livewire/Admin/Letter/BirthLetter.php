@@ -4,7 +4,9 @@ namespace App\Livewire\Admin\Letter;
 
 use App\Models\Request;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Title;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Layout;
 
 class BirthLetter extends Component
@@ -45,5 +47,54 @@ class BirthLetter extends Component
     public function closeModal()
     {
         $this->isModalOpen = false; // Close modal
+    }
+
+    public function downloadPDF($id)
+    {
+        //composer require barryvdh/laravel-dompdf
+        // Retrieve data for the document
+        $birthLetter = BirthLetter::findOrFail($id);
+
+        // Generate HTML content
+        $htmlContent = view('pdf.birth_letter', compact('birthLetter'))->render();
+
+        // Generate PDF using DomPDF
+        $pdf = Pdf::loadHTML($htmlContent)
+            ->setPaper('a4') // Set the paper size (optional)
+            ->setOption('isHtml5ParserEnabled', true) // Optional settings
+            ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
+        // Pastikan kolom nama surat ada di tabel
+        // Format nama surat untuk mencegah karakter tidak valid
+        $namaSurat = Str::slug($birthLetter->name); // Menggunakan slug agar aman untuk nama file
+
+        // Return the PDF as a download
+        $pdfFileName = "Akta Kelahiran | {$namaSurat}.pdf";
+        return $pdf->download($pdfFileName);
+    }
+
+    public function streamPDF($id)
+    {
+        // Retrieve data for the document
+        $birthLetter = BirthLetter::findOrFail($id);
+
+        // Generate PDF using DomPDF
+        $pdf = Pdf::loadView('pdf.birth_letter', ['birthLetter' => $birthLetter])
+            ->setPaper('a4') // Set the paper size (optional)
+            ->setOption('isHtml5ParserEnabled', true) // Optional settings
+            ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
+
+        // Format nama surat untuk mencegah karakter tidak valid
+        $namaSurat = Str::slug($birthLetter->name); // Menggunakan slug agar aman untuk nama file
+
+        // Tentukan nama file PDF
+        $pdfFileName = "Akta-Kelahiran-{$namaSurat}.pdf";
+
+        // Simpan file ke dalam folder 'storage/app/public/pdf'
+        $filePath = storage_path("app/public/pdf/{$pdfFileName}");
+        $pdf->save($filePath);
+
+
+        // Stream the PDF to the browser
+        return $pdf->stream();
     }
 }

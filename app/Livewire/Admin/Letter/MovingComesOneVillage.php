@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Letter;
 use App\Models\Family;
 use App\Models\Request;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Title;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Layout;
@@ -82,8 +83,10 @@ class MovingComesOneVillage extends Component
             ->setOption('isHtml5ParserEnabled', true) // Optional settings
             ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
 
+        $namaSurat = Str::slug($MovingComesInOneVillageLetter->name);
+
         // Return the PDF as a download
-        $pdfFileName = "moving-comes-in-one-village-letter-{$id}.pdf";
+        $pdfFileName = "Surat Pindah Datang Dalam Satu Desa | {$namaSurat}.pdf";
         return $pdf->download($pdfFileName);
     }
 
@@ -104,9 +107,11 @@ class MovingComesOneVillage extends Component
             ->setOption('isHtml5ParserEnabled', true) // Optional settings
             ->setOption('isRemoteEnabled', true);     // Allow loading external CSS/JS (optional)
 
+        $namaSurat = Str::slug($MovingComesInOneVillageLetter->name);
+
         // Save the PDF to a specific directory
-        $pdfFileName = "moving-comes-in-one-village-letter-{$id}.pdf";
-        $filePath = ('pdf/' . $pdfFileName);
+        $pdfFileName = "Surat-Pindah-Datang-Dalam-Satu-Desa-{$namaSurat}.pdf";
+        $filePath = storage_path('app/public/pdf/' . $pdfFileName);
         $pdf->save($filePath);
 
 

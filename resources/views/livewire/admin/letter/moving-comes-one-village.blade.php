@@ -66,15 +66,6 @@
                                     </th>
                                     <th scope="col"
                                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                        Foto KTP
-                                    </th>
-                                    <th scope="col"
-                                        class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                        Foto Selfie + KTP
-                                    </th>
-
-                                    <th scope="col"
-                                        class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                         Aksi
                                     </th>
                                 </tr>
@@ -82,7 +73,7 @@
                             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                                 @foreach ($requests as $request)
                                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                        <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
+                                        <td class="p-4 mr-12 space-x-6 whitespace-nowrap">
                                             <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                                                 <div class="text-base font-semibold text-gray-900 dark:text-white">
                                                     {{ $loop->iteration }}
@@ -101,26 +92,6 @@
                                             class="p-4 text-base font-medium text-gray-900 break-words whitespace-normal dark:text-white">
                                             {{ $request->MovingComesInOneVillageLetter->number_letter ?? 'Belum ada nomor surat. Edit data untuk menambahkan nomor surat.' }}
                                         </td>
-
-                                        <!-- Thumbnail Images -->
-                                        <td
-                                            class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <!-- Link for KTP -->
-                                            <a href="#" class="text-blue-600 underline cursor-pointer"
-                                                wire:click="openModal('{{ Storage::url($request->image_ktp) }}')">
-                                                Lihat KTP
-                                            </a>
-                                        </td>
-
-                                        <td
-                                            class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <!-- Link for Selfie -->
-                                            <a href="#" class="text-blue-600 underline cursor-pointer"
-                                                wire:click="openModal('{{ Storage::url($request->image_selfie) }}')">
-                                                Lihat Selfie
-                                            </a>
-                                        </td>
-
                                         <td class="p-4 space-x-2 whitespace-nowrap">
                                             <div class="flex flex-col gap-3">
 
