@@ -14,34 +14,34 @@ class WaterDebit extends Component
     #[Layout('layouts.admin')]
     #[Title('Debit Air | Desa Kepuh')]
 
-    public $node1Data = [];
-    public $node2Data = [];
-    public $node3Data = [];
+    // public $node1Data = [];
+    // public $node2Data = [];
+    // public $node3Data = [];
 
-    public function mount()
-    {
-        // Fetch flow rate data for each node from the database
-        $this->node1Data = DB::table('volume_air')
-            ->where('node_id', 'node1')
-            ->orderByDesc('timestamp')
-            ->limit(60)
-            ->pluck('flow_rate')
-            ->toArray();
+    // public function mount()
+    // {
+    //     // Fetch flow rate data for each node from the database
+    //     $this->node1Data = DB::table('volume_air')
+    //         ->where('node_id', 'node1')
+    //         ->orderByDesc('timestamp')
+    //         ->limit(60)
+    //         ->pluck('flow_rate')
+    //         ->toArray();
 
-        $this->node2Data = DB::table('volume_air')
-            ->where('node_id', 'node2')
-            ->orderByDesc('timestamp')
-            ->limit(60)
-            ->pluck('flow_rate')
-            ->toArray();
+    //     $this->node2Data = DB::table('volume_air')
+    //         ->where('node_id', 'node2')
+    //         ->orderByDesc('timestamp')
+    //         ->limit(60)
+    //         ->pluck('flow_rate')
+    //         ->toArray();
 
-        $this->node3Data = DB::table('volume_air')
-            ->where('node_id', 'node3')
-            ->orderByDesc('timestamp')
-            ->limit(60)
-            ->pluck('flow_rate')
-            ->toArray();
-    }
+    //     $this->node3Data = DB::table('volume_air')
+    //         ->where('node_id', 'node3')
+    //         ->orderByDesc('timestamp')
+    //         ->limit(60)
+    //         ->pluck('flow_rate')
+    //         ->toArray();
+    // }
 
     // public $columnChartModel;
     // public $dateRange = 'daily'; // Default to 'daily'

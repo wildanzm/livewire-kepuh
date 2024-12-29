@@ -63,7 +63,7 @@ class BusinessLetter extends Component
         $namaSurat = Str::slug($businessLetter->name); // Menggunakan slug agar aman untuk nama file
 
         // Tentukan nama file PDF
-        $pdfFileName = "surat-usaha-{$namaSurat}.pdf";
+        $pdfFileName = "Surat-Keterangan-Usaha-{$namaSurat}.pdf";
 
         // Simpan file ke dalam folder 'storage/app/public/pdf'
         $filePath = storage_path("app/public/pdf/{$pdfFileName}");
@@ -91,7 +91,7 @@ class BusinessLetter extends Component
         $namaSurat = Str::slug($businessLetter->name); // Menggunakan slug agar aman untuk nama file
 
         // Return the PDF as a download
-        $pdfFileName = "surat-usaha-{$namaSurat}.pdf";
+        $pdfFileName = "Surat Keterangan Usaha | {$namaSurat}.pdf";
         return $pdf->download($pdfFileName);
     }
 }

@@ -59,7 +59,7 @@ class Poverty extends Component
         // Format nama surat untuk mencegah karakter tidak valid
         $namaSurat = Str::slug($povertyLetter->name); // Menggunakan slug agar aman untuk nama file
         // Return the PDF as a download
-        $pdfFileName = "surat-keterangan-tidak-mampu-{$namaSurat}.pdf";
+        $pdfFileName = "Surat Keterangan Tidak Mampu | {$namaSurat}.pdf";
         return $pdf->download($pdfFileName);
     }
 
@@ -77,7 +77,7 @@ class Poverty extends Component
         // Format nama surat untuk mencegah karakter tidak valid
         $namaSurat = Str::slug($povertyLetter->name); // Menggunakan slug agar aman untuk nama file
         // Save the PDF to a specific directory
-        $pdfFileName = "surat-keterangan-tidak-mampu-{$namaSurat}.pdf";
+        $pdfFileName = "Surat-Keterangan-Tidak-Mampu-{$namaSurat}.pdf";
         // Simpan file ke dalam folder 'storage/app/public/pdf'
         $filePath = storage_path("app/public/pdf/{$pdfFileName}");
         $pdf->save($filePath);

@@ -70,7 +70,7 @@ class Domicile extends Component
         $namaSurat = Str::slug($domicileLetter->name); // Menggunakan slug agar aman untuk nama file
 
         // Return the PDF as a download
-        $pdfFileName = "surat-domisili-{$namaSurat}.pdf";
+        $pdfFileName = "Surat Domisili | {$namaSurat}.pdf";
         return $pdf->download($pdfFileName);
     }
 
@@ -89,7 +89,7 @@ class Domicile extends Component
         $namaSurat = Str::slug($domicileLetter->name); // Menggunakan slug agar aman untuk nama file
 
         // Tentukan nama file PDF
-        $pdfFileName = "surat-domisili-{$namaSurat}.pdf";
+        $pdfFileName = "Surat-Domisili-{$namaSurat}.pdf";
 
         // Simpan file ke dalam folder 'storage/app/public/pdf'
         $filePath = storage_path("app/public/pdf/{$pdfFileName}");

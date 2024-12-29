@@ -15,7 +15,7 @@ class TypeLetterSeeder extends Seeder
     {
         $typeLetter = [
             ['name' => 'Surat Keterangan Tidak Mampu'],
-            ['name' => 'Surat Pindah Datang Dalam satu Desa'],
+            ['name' => 'Surat Pindah Datang Dalam Satu Desa'],
             ['name' => 'Surat Domisili'],
             ['name' => 'Surat Keterangan Usaha'],
             ['name' => 'Akta Kelahiran'],
