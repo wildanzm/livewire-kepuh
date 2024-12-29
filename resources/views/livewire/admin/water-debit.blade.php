@@ -144,6 +144,107 @@
         </div> --}}
 
         <!-- 2 columns -->
+        <div class="mt-6 p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold">Rekapan Debit Air</h2>
+                
+                <div class="flex items-center space-x-4">
+                    <select 
+                        id="periodSelect" 
+                        class="form-select rounded-lg border-gray-300"
+                        onchange="filterPeriod(this.value)"
+                    >
+                        <option value="daily">Harian</option>
+                        <option value="monthly">Bulanan</option>
+                        <option value="yearly">Tahunan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Card Harian -->
+                <div data-period="daily" class="rekap-card bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-lg font-semibold text-gray-700">2023-12-01</h3>
+                        <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">Harian</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <p class="text-xs text-gray-500">Total Debit</p>
+                            <p class="text-lg font-bold text-blue-600">1,250.50 m³</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500">Rata-rata Debit</p>
+                            <p class="text-lg font-bold text-green-600">52.10 m³/jam</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 border-t pt-2">
+                        <a href="#" class="text-sm text-blue-500 hover:underline">Detail Rekap</a>
+                    </div>
+                </div>
+        
+                <!-- Card Harian 2 -->
+                <div data-period="daily" class="rekap-card bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-lg font-semibold text-gray-700">2023-12-02</h3>
+                        <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">Harian</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <p class="text-xs text-gray-500">Total Debit</p>
+                            <p class="text-lg font-bold text-blue-600">1,175.25 m³</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500">Rata-rata Debit</p>
+                            <p class="text-lg font-bold text-green-600">49.00 m³/jam</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 border-t pt-2">
+                        <a href="#" class="text-sm text-blue-500 hover:underline">Detail Rekap</a>
+                    </div>
+                </div>
+        
+                <!-- Card Bulanan -->
+                <div data-period="monthly" class="rekap-card bg-white border border-gray-200 rounded-lg p-4 shadow-sm" style="display:none;">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-lg font-semibold text-gray-700">2023-12</h3>
+                        <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">Bulanan</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <p class="text-xs text-gray-500">Total Debit</p>
+                            <p class="text-lg font-bold text-blue-600">15,000.50 m³</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500">Rata-rata Debit</p>
+                            <p class="text-lg font-bold text-green-600">500.10 m³/jam</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 border-t pt-2">
+                        <a href="#" class="text-sm text-blue-500 hover:underline">Detail Rekap</a>
+                    </div>
+                </div>
+        
+                <!-- Card Tahunan -->
+                <div data-period="yearly" class="rekap-card bg-white border border-gray-200 rounded-lg p-4 shadow-sm" style="display:none;">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-lg font-semibold text-gray-700">2023</h3>
+                        <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">Tahunan</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <p class="text-xs text-gray-500">Total Debit</p>
+                            <p class="text-lg font-bold text-blue-600">180,000.50 m³</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500">Rata-rata Debit</p>
+                            <p class="text-lg font-bold text-green-600">15,000.10 m³/jam</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 border-t pt-2">
+                        <a href="#" class="text-sm text-blue-500 hover:underline">Detail Rekap</a>
+                    </div>
+                </div>
+            </div>
     </div>
     <script>
         document.addEventListener('livewire:load', function() {
@@ -223,5 +324,14 @@
                 }
             });
         });
+
+        function filterPeriod(period) {
+        const cards = document.querySelectorAll('.rekap-card');
+        
+        // Menampilkan atau menyembunyikan kartu berdasarkan periode
+        cards.forEach(card => {
+            card.style.display = card.getAttribute('data-period') === period ? '' : 'none';
+        });
+    }
     </script>
 </main>
