@@ -22,6 +22,12 @@ class EditVillageLetter extends Component
     public $south_border;
     public $west_border;
 
+    // Menambahkan properti baru untuk kolom yang ditambahkan
+    public $letter_c_number;
+    public $land_assessment_price;
+    public $building_assessment_price;
+    public $total_assessment_price;
+
     #[Layout('layouts.admin')]
     #[Title('Edit Data Surat Tanah | Desa Kepuh')]
     public function mount($id)
@@ -39,7 +45,37 @@ class EditVillageLetter extends Component
         $this->east_border = $letter->east_border;
         $this->south_border = $letter->south_border;
         $this->west_border = $letter->west_border;
+
+        // Menambahkan pengambilan data untuk kolom baru
+        $this->letter_c_number = $letter->letter_c_number;
+        $this->land_assessment_price = $letter->land_assessment_price;
+        $this->building_assessment_price = $letter->building_assessment_price;
+        $this->total_assessment_price = $letter->total_assessment_price;
     }
+
+
+    public function updated($propertyName)
+    {
+        // Kalkulasi total saat salah satu field diubah
+        if (
+            $propertyName === 'land_assessment_price' ||
+            $propertyName === 'building_assessment_price'
+        ) {
+            $this->calculateTotal();
+        }
+    }
+
+    public function calculateTotal()
+    {
+        // Kalkulasi total dari harga taksiran tanah dan bangunan
+        $landPrice = (float) str_replace(['.', ','], ['', '.'], $this->land_assessment_price);
+        $buildingPrice = (float) str_replace(['.', ','], ['', '.'], $this->building_assessment_price);
+
+        if ($landPrice > 0 || $buildingPrice > 0) {
+            $this->total_assessment_price = $landPrice + $buildingPrice;
+        }
+    }
+
 
     public function update()
     {
@@ -55,6 +91,11 @@ class EditVillageLetter extends Component
             'east_border' => 'required|string|max:255',
             'south_border' => 'required|string|max:255',
             'west_border' => 'required|string|max:255',
+            // Validasi untuk kolom baru
+            'letter_c_number' => 'nullable|string|max:255',
+            'land_assessment_price' => 'nullable|numeric',
+            'building_assessment_price' => 'nullable|numeric',
+            'total_assessment_price' => 'nullable|numeric',
         ]);
 
         $letter = VillageLetter::findOrFail($this->letterId);
@@ -70,6 +111,11 @@ class EditVillageLetter extends Component
             'east_border' => $this->east_border,
             'south_border' => $this->south_border,
             'west_border' => $this->west_border,
+            // Menambahkan kolom baru ke dalam update
+            'letter_c_number' => $this->letter_c_number,
+            'land_assessment_price' => $this->land_assessment_price,
+            'building_assessment_price' => $this->building_assessment_price,
+            'total_assessment_price' => $this->total_assessment_price,
         ]);
 
         session()->flash('success', 'Data surat tanah berhasil diperbarui!');

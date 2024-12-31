@@ -1,4 +1,5 @@
 <div>
+
     <div class="max-w-4xl mx-auto mt-10 py-6 bg-white shadow-xl p-8 my-10 rounded-xl">
         <h1 class="text-2xl font-bold mb-5">Ajukan Permintaan Surat</h1>
 
@@ -47,7 +48,9 @@
                             <input type="{{ $field['type'] }}" wire:model="formFieldsValues.{{ $field['name'] }}"
                                 id="{{ $field['name'] }}"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                                placeholder="{{ $field['placeholder'] }}">
+                                placeholder="{{ $field['placeholder'] }}"
+                                @if (isset($field['oninput'])) oninput="{{ $field['oninput'] }}" @endif
+                                @if (isset($field['readonly']) && $field['readonly']) readonly @endif>
                         @elseif ($field['type'] === 'textarea')
                             <textarea wire:model="formFieldsValues.{{ $field['name'] }}" id="{{ $field['name'] }}" rows="3"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -66,6 +69,37 @@
                         @enderror
                     </div>
                 @endforeach
+
+
+
+                @if ($type_letter_id == 6)
+                    <div class="mt-6 border-t pt-4">
+                        <h3 class="text-lg font-semibold mb-4">Detail Taksiran</h3>
+
+                        <!-- Input Field Dinamis untuk Detail Taksiran -->
+                        @foreach ($assessmentFields as $field)
+                            <div class="mb-4">
+                                <label for="assessment_{{ $field['name'] }}"
+                                    class="block text-sm font-medium text-gray-700">
+                                    {{ $field['label'] }}
+                                </label>
+                                <input type="text"
+                                    wire:model.lazy="formFieldsValues.assessment_{{ $field['name'] }}"
+                                    id="assessment_{{ $field['name'] }}"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                    placeholder="{{ $field['placeholder'] }}"
+                                    @if (isset($field['readonly']) && $field['readonly']) readonly @endif
+                                    value="{{ isset($formFieldsValues['assessment_' . $field['name']])
+                                        ? number_format((float) str_replace('.', '', $formFieldsValues['assessment_' . $field['name']]), 0, ',', '.')
+                                        : '' }}"
+                                    oninput="this.value = formatRupiah(this.value)">
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+
+
 
                 <!-- Tambah Anggota Keluarga untuk Surat Pindah (Type Letter ID 2) -->
                 @if ($type_letter_id == 2)
@@ -133,3 +167,43 @@
         </form>
     </div>
 </div>
+<script>
+    // Fungsi untuk memformat angka menjadi format rupiah
+    function formatRupiah(angka) {
+        // Hapus karakter non-digit
+        let numberString = angka.replace(/[^,\d]/g, '');
+        let split = numberString.split(',');
+        let sisa = split[0].length % 3;
+        let rupiah = split[0].substr(0, sisa);
+        let ribuan = split[0].substr(sisa).match(/\d{3}/g);
+
+        if (ribuan) {
+            let separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+        return rupiah;
+    }
+
+    // Pilih semua elemen dengan class "price_assessment"
+    let priceInputs = document.querySelectorAll('.price_assessment');
+
+    // Tambahkan event listener hanya pada elemen dengan class "price_assessment"
+    priceInputs.forEach(function(input) {
+        input.addEventListener('input', function() {
+            input.value = formatRupiah(input.value); // Format nilai saat input berubah
+        });
+    });
+
+    function formatCurrency(input) {
+        let value = input.value.replace(/\D/g, ''); // Hanya angka
+        value = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0,
+        }).format(value);
+
+        input.value = value.replace("Rp", "").trim(); // Opsional: menghapus simbol "Rp"
+    }
+</script>

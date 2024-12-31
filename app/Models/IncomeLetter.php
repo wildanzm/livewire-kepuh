@@ -16,6 +16,7 @@ class IncomeLetter extends Model
         'birth_date',
         'occupation',
         'address',
+        'average_income',
         'parent_name',
         'parent_nik',
         'parent_gender',

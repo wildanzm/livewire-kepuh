@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Letter;
 
+use App\Models\BirthLetter as ModelsBirthLetter;
 use App\Models\Request;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -53,7 +54,7 @@ class BirthLetter extends Component
     {
         //composer require barryvdh/laravel-dompdf
         // Retrieve data for the document
-        $birthLetter = BirthLetter::findOrFail($id);
+        $birthLetter = ModelsBirthLetter::findOrFail($id);
 
         // Generate HTML content
         $htmlContent = view('pdf.birth_letter', compact('birthLetter'))->render();
@@ -75,7 +76,7 @@ class BirthLetter extends Component
     public function streamPDF($id)
     {
         // Retrieve data for the document
-        $birthLetter = BirthLetter::findOrFail($id);
+        $birthLetter = ModelsBirthLetter::findOrFail($id);
 
         // Generate PDF using DomPDF
         $pdf = Pdf::loadView('pdf.birth_letter', ['birthLetter' => $birthLetter])

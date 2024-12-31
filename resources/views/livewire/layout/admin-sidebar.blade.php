@@ -74,7 +74,7 @@ new class extends Component {}; ?>
                         Keterangan Tidak Mampu</a>
                 </li>
                 <li>
-                    <a href=""
+                    <a href="{{ route('admin.income-letter') }}"
                         class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
                         Pendapatan</a>
                 </li>
