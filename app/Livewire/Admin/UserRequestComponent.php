@@ -26,7 +26,11 @@ class UserRequestComponent extends Component
     public $image_ktp;
     public $image_selfie;
     public $formFields = [];
-    public $formFieldsValues = [];
+    public $formFieldsValues = [
+        'assessment_land_assessment_price' => 0,
+        'assessment_building_assessment_price' => 0,
+        'assessment_total_assessment_price' => 0,
+    ];
     public $isFormVisible = false;
     public $activeTab = 1; // Default tab
     public $familyMembers = []; // New property to store family members
@@ -35,6 +39,31 @@ class UserRequestComponent extends Component
         ['name' => 'name', 'label' => 'Nama', 'type' => 'text'],
         ['name' => 'ktp_expiry', 'label' => 'Tanggal Kadaluarsa KTP', 'type' => 'date'],
         ['name' => 'shdk', 'label' => 'Status Hubungan Keluarga', 'type' => 'select'],
+    ];
+    // Daftar Field untuk Detail Taksiran
+    public $assessmentFields = [
+        [
+            'name' => 'land_assessment_price',
+            'type' => 'number',
+            'label' => 'Harga Taksiran Tanah (Rp)',
+            'class' => 'price_assessment',
+            'placeholder' => 'Masukkan harga taksiran tanah',
+        ],
+        [
+            'name' => 'building_assessment_price',
+            'type' => 'number',
+            'label' => 'Harga Taksiran Bangunan (Rp)',
+            'class' => 'price_assessment',
+            'placeholder' => 'Masukkan harga taksiran bangunan',
+        ],
+        [
+            'name' => 'total_assessment_price',
+            'type' => 'number',
+            'label' => 'Jumlah Taksiran (Rp)',
+            'placeholder' => 'Jumlah Taksiran',
+            'class' => 'price_assessment',
+            'readonly' => true,
+        ],
     ];
 
 
@@ -120,6 +149,34 @@ class UserRequestComponent extends Component
     {
         $selectedType = $this->typeLetters->firstWhere('id', $this->type_letter_id);
         return $selectedType ? $selectedType['name'] : null;
+    }
+
+    public function updated($propertyName)
+    {
+        // Kalkulasi total jika salah satu field diubah
+        if (
+            $propertyName === 'formFieldsValues.assessment_land_assessment_price' ||
+            $propertyName === 'formFieldsValues.assessment_building_assessment_price'
+        ) {
+            $this->calculateTotal();
+        }
+    }
+    public function calculateTotal()
+    {
+        // Ambil nilai dari kedua inputan, hapus format ribuan, dan ubah ke float
+        $landPrice = (float) str_replace(['.', ','], ['', '.'], $this->formFieldsValues['assessment_land_assessment_price']);
+        $buildingPrice = (float) str_replace(['.', ','], ['', '.'], $this->formFieldsValues['assessment_building_assessment_price']);
+
+        // Kalkulasi total jika salah satu atau kedua inputan memiliki nilai
+        $total = $landPrice + $buildingPrice;
+
+        // Format total ke dalam format IDR (Rp) dengan titik sebagai pemisah ribuan
+        $this->formFieldsValues['assessment_total_assessment_price'] = number_format($total, 0, ',', '.');
+    }
+
+    private function cleanCurrency($value)
+    {
+        return (float) str_replace(['.', ','], ['', '.'], $value); // Hapus titik dan ubah koma menjadi titik desimal
     }
 
     public function loadFormFields()
@@ -273,7 +330,7 @@ class UserRequestComponent extends Component
                     ['name' => 'witness2_address', 'type' => 'textarea', 'label' => 'Alamat Saksi 2', 'placeholder' => 'Masukkan Alamat Saksi 2'],
                 ];
                 break;
-            case 6: // domicille Letter
+            case 6: // Village Letter
                 $this->formFields =
                     [
                         ['name' => 'sppt_number', 'type' => 'text', 'label' => 'Nomor SPPT', 'placeholder' => 'Masukkan nomor SPPT'],
@@ -287,6 +344,24 @@ class UserRequestComponent extends Component
                         ['name' => 'south_border', 'type' => 'text', 'label' => 'Batas Selatan', 'placeholder' => 'Masukkan batas selatan'],
                         ['name' => 'west_border', 'type' => 'text', 'label' => 'Batas Barat', 'placeholder' => 'Masukkan batas barat'],
                     ];
+                break;
+            case 7: // Income Letter
+                $this->formFields = [
+                    ['name' => 'name', 'type' => 'text', 'label' => 'Nama', 'placeholder' => 'Masukkan nama'],
+                    ['name' => 'nik', 'type' => 'number', 'label' => 'NIK', 'placeholder' => 'Masukkan NIK'],
+                    ['name' => 'birth_place', 'type' => 'text', 'label' => 'Tempat Lahir', 'placeholder' => 'Masukkan tempat lahir'],
+                    ['name' => 'birth_date', 'type' => 'date', 'label' => 'Tanggal Lahir', 'placeholder' => 'Pilih tanggal lahir'],
+                    ['name' => 'occupation', 'type' => 'text', 'label' => 'Pekerjaan', 'placeholder' => 'Masukkan pekerjaan'],
+                    ['name' => 'address', 'type' => 'textarea', 'label' => 'Alamat', 'placeholder' => 'Masukkan alamat'],
+                    ['name' => 'average_income', 'type' => 'text', 'label' => 'Rata-Rata Penghasilan', 'placeholder' => 'Masukkan rata-rata penghasilan', 'oninput' => 'formatCurrency(this)'],
+                    ['name' => 'parent_name', 'type' => 'text', 'label' => 'Nama Orang Tua', 'placeholder' => 'Masukkan nama orang tua'],
+                    ['name' => 'parent_nik', 'type' => 'number', 'label' => 'NIK Orang Tua', 'placeholder' => 'Masukkan NIK orang tua'],
+                    ['name' => 'parent_gender', 'type' => 'select', 'label' => 'Jenis Kelamin Orang Tua', 'options' => ['L' => 'Laki-laki', 'P' => 'Perempuan'], 'placeholder' => 'Pilih jenis kelamin'],
+                    ['name' => 'parent_birth_place', 'type' => 'text', 'label' => 'Tempat Lahir Orang Tua', 'placeholder' => 'Masukkan tempat lahir orang tua'],
+                    ['name' => 'parent_nationality', 'type' => 'text', 'label' => 'Kewarganegaraan Orang Tua', 'placeholder' => 'Masukkan kewarganegaraan orang tua'],
+                    ['name' => 'parent_religion', 'type' => 'text', 'label' => 'Agama Orang Tua', 'placeholder' => 'Masukkan agama orang tua'],
+                    ['name' => 'parent_address', 'type' => 'textarea', 'label' => 'Alamat Orang Tua', 'placeholder' => 'Masukkan alamat orang tua'],
+                ];
                 break;
             default:
                 $this->formFields = [];
@@ -393,7 +468,7 @@ class UserRequestComponent extends Component
     public function render()
     {
         return view('livewire.admin.admin-request-component', [
-            'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3, 4, 5, 6])->get(),
+            'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3, 4, 5, 6, 7])->get(),
         ]);
     }
 }

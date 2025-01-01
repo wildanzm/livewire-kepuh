@@ -121,6 +121,31 @@
                     @endif
                 </div>
             @endif
+
+            @if ($type_letter_id == 6)
+                <div class="mt-6 border-t pt-4">
+                    <h3 class="text-lg font-semibold mb-4">Detail Taksiran</h3>
+
+                    <!-- Input Field Dinamis untuk Detail Taksiran -->
+                    @foreach ($assessmentFields as $field)
+                        <div class="mb-4">
+                            <label for="assessment_{{ $field['name'] }}"
+                                class="block text-sm font-medium text-gray-700">
+                                {{ $field['label'] }}
+                            </label>
+                            <input type="text" wire:model.lazy="formFieldsValues.assessment_{{ $field['name'] }}"
+                                id="assessment_{{ $field['name'] }}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                placeholder="{{ $field['placeholder'] }}"
+                                @if (isset($field['readonly']) && $field['readonly']) readonly @endif
+                                value="{{ isset($formFieldsValues['assessment_' . $field['name']])
+                                    ? number_format((float) str_replace('.', '', $formFieldsValues['assessment_' . $field['name']]), 0, ',', '.')
+                                    : '' }}"
+                                oninput="this.value = formatRupiah(this.value)">
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         @endif
 
         <!-- Submit Button -->
