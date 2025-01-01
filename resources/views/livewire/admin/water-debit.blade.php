@@ -1,19 +1,22 @@
 <main>
     <div class="px-4 pt-6">
-        <div class="gap-4 2xl:grid-cols-3">
+        <div class="gap-4 grid grid-cols-2">
             <!-- Main widget -->
             <!-- Rekapan start -->
 
             <div
-                class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm overflow-x-scroll col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                <h1 class="text-3xl font-bold ">Data Debit Air</h1>
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex-shrink-0">
                         {{-- <canvas id="flowRateChart" width="800" height="400">
                         </canvas> --}}
                         <div>
-                            <h1 class="text-3xl font-bold ">Data Debit Air</h1>
-                            <iframe src="https://api.kepuh.co.id/flow.php" width="1000" height="600"></iframe>
-                            <iframe src="https://api.kepuh.co.id/rssi.php" width="1000" height="600"></iframe>
+
+                            <iframe src="https://api.kepuh.co.id/flow.php" class="w-[63rem] h-[40rem] max-xl:w-[40rem]"></iframe>
+                            <iframe src="https://api.kepuh.co.id/rssi.php" class="w-full h-[40rem]"></iframe>
+
+                            
                         </div>
                     </div>
                 </div>
@@ -57,10 +60,11 @@
                                         role="menuitem">Rekap Per Bulan</a>
                                 </li>
                             </ul>
+
                         </div>
                     </div>
-
                 </div>
+                <!-- Rekapan End -->
             </div>
             <!--Tabs widget -->
         </div>
@@ -144,14 +148,17 @@
         </div> --}}
 
         <!-- 2 columns -->
-        <div
-            class="my-6 p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div class="mt-6 p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-2xl font-bold">Rekapan Debit Air</h2>
-
+                
                 <div class="flex items-center space-x-4">
-                    <select id="periodSelect" class="form-select rounded-lg border-gray-300"
-                        onchange="filterPeriod(this.value)">
+                    <select 
+                        id="periodSelect" 
+                        class="form-select rounded-lg border-gray-300"
+                        onchange="filterPeriod(this.value)"
+                    >
+
                         <option value="daily">Harian</option>
                         <option value="monthly">Bulanan</option>
                         <option value="yearly">Tahunan</option>
@@ -200,10 +207,9 @@
                         <a href="#" class="text-sm text-blue-500 hover:underline">Detail Rekap</a>
                     </div>
                 </div>
-
+        
                 <!-- Card Bulanan -->
-                <div data-period="monthly" class="rekap-card bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
-                    style="display:none;">
+                <div data-period="monthly" class="rekap-card bg-white border border-gray-200 rounded-lg p-4 shadow-sm" style="display:none;">
                     <div class="flex justify-between items-center mb-3">
                         <h3 class="text-lg font-semibold text-gray-700">2023-12</h3>
                         <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">Bulanan</span>
@@ -222,10 +228,9 @@
                         <a href="#" class="text-sm text-blue-500 hover:underline">Detail Rekap</a>
                     </div>
                 </div>
-
+        
                 <!-- Card Tahunan -->
-                <div data-period="yearly" class="rekap-card bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
-                    style="display:none;">
+                <div data-period="yearly" class="rekap-card bg-white border border-gray-200 rounded-lg p-4 shadow-sm" style="display:none;">
                     <div class="flex justify-between items-center mb-3">
                         <h3 class="text-lg font-semibold text-gray-700">2023</h3>
                         <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">Tahunan</span>
@@ -245,93 +250,93 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <script>
-            document.addEventListener('livewire:load', function() {
-                // Debug data
-                const node1Data = @json($node1Data ?? [10, 20, 30]); // Ganti dengan data statis sementara
-                const node2Data = @json($node2Data ?? [15, 25, 35]);
-                const node3Data = @json($node3Data ?? [20, 30, 40]);
+    </div>
+    <script>
+        document.addEventListener('livewire:load', function() {
+            // Debug data
+            const node1Data = @json($node1Data ?? [10, 20, 30]); // Ganti dengan data statis sementara
+            const node2Data = @json($node2Data ?? [15, 25, 35]);
+            const node3Data = @json($node3Data ?? [20, 30, 40]);
 
-                console.log({
-                    node1Data,
-                    node2Data,
-                    node3Data
-                }); // Debugging
+            console.log({
+                node1Data,
+                node2Data,
+                node3Data
+            }); // Debugging
 
-                const chartCanvas = document.getElementById('flowRateChart');
-                if (!chartCanvas) {
-                    console.error('Canvas element not found!');
-                    return;
-                }
+            const chartCanvas = document.getElementById('flowRateChart');
+            if (!chartCanvas) {
+                console.error('Canvas element not found!');
+                return;
+            }
 
-                // Labels for X-Axis
-                const labels = Array.from({
-                    length: Math.max(node1Data.length, node2Data.length, node3Data.length)
-                }, (_, i) => i + 1);
+            // Labels for X-Axis
+            const labels = Array.from({
+                length: Math.max(node1Data.length, node2Data.length, node3Data.length)
+            }, (_, i) => i + 1);
 
-                // Render Chart
-                new Chart(chartCanvas.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                                label: 'Node 1 Flow Rate',
-                                data: node1Data,
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderWidth: 2
-                            },
-                            {
-                                label: 'Node 2 Flow Rate',
-                                data: node2Data,
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderWidth: 2
-                            },
-                            {
-                                label: 'Node 3 Flow Rate',
-                                data: node3Data,
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderWidth: 2
-                            }
-                        ]
+            // Render Chart
+            new Chart(chartCanvas.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                            label: 'Node 1 Flow Rate',
+                            data: node1Data,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Node 2 Flow Rate',
+                            data: node2Data,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Node 3 Flow Rate',
+                            data: node3Data,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
                     },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
+                    scales: {
+                        x: {
+                            title: {
                                 display: true,
-                                position: 'top'
+                                text: 'Data Points'
                             }
                         },
-                        scales: {
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Data Points'
-                                }
-                            },
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Flow Rate'
-                                }
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Flow Rate'
                             }
                         }
                     }
-                });
+                }
             });
+        });
 
-            function filterPeriod(period) {
-                const cards = document.querySelectorAll('.rekap-card');
-
-                // Menampilkan atau menyembunyikan kartu berdasarkan periode
-                cards.forEach(card => {
-                    card.style.display = card.getAttribute('data-period') === period ? '' : 'none';
-                });
-            }
-        </script>
+        function filterPeriod(period) {
+        const cards = document.querySelectorAll('.rekap-card');
+        
+        // Menampilkan atau menyembunyikan kartu berdasarkan periode
+        cards.forEach(card => {
+            card.style.display = card.getAttribute('data-period') === period ? '' : 'none';
+        });
+    }
+    </script>
 </main>
