@@ -52,7 +52,7 @@ class VillageLetter extends Component
     public function streamPDF($id)
     {
         // Retrieve data for the document
-        $villageLetter = VillageLetter::findOrFail($id);
+        $villageLetter = \App\Models\VillageLetter::findOrFail($id);
 
         // Generate PDF using DomPDF
         $pdf = Pdf::loadView('pdf.village_letter', ['villageLetter' => $villageLetter])

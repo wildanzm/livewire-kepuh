@@ -25,6 +25,11 @@ return new class extends Migration
             $table->string('east_border');
             $table->string('south_border');
             $table->string('west_border');
+            // Menambahkan kolom baru untuk Letter C dan harga taksiran
+            $table->string('letter_c_number')->nullable(); // Kolom untuk "Letter C No ..."
+            $table->decimal('land_assessment_price', 50, 2)->nullable(); // Kolom untuk harga taksiran tanah
+            $table->decimal('building_assessment_price', 50, 2)->nullable(); // Kolom untuk harga taksiran bangunan
+            $table->decimal('total_assessment_price', 50, 2)->nullable(); // Kolom untuk jumlah total
             $table->timestamps();
         });
     }

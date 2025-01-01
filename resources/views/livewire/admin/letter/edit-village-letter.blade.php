@@ -1,4 +1,4 @@
-<div class="max-w-4xl mx-auto my-6  bg-white shadow-xl p-8  rounded-xl ">
+<div class="max-w-4xl mx-auto my-6 bg-white shadow-xl p-8 rounded-xl">
     <h2 class="text-2xl font-bold mb-4">Edit Data Surat Desa</h2>
 
     @if (session()->has('message'))
@@ -8,36 +8,30 @@
     @endif
 
     <form wire:submit.prevent="update">
-        @foreach ([['number_letter', 'Nomor Surat', 'text'], ['sppt_number', 'Nomor SPPT', 'text'], ['persil_number', 'Nomor Persil', 'text'], ['kohir_number', 'Nomor Kohir', 'text'], ['class', 'Kelas', 'text'], ['land_area', 'Luas Tanah', 'number'], ['land_owner', 'Nama Pemilik Tanah', 'text'], ['north_border', 'Batas Utara', 'text'], ['east_border', 'Batas Timur', 'text'], ['south_border', 'Batas Selatan', 'text'], ['west_border', 'Batas Barat', 'text']] as $field)
+        @foreach ([['number_letter', 'Nomor Surat', 'text'], ['sppt_number', 'Nomor SPPT', 'text'], ['persil_number', 'Nomor Persil', 'text'], ['kohir_number', 'Nomor Kohir', 'text'], ['class', 'Kelas', 'text'], ['land_area', 'Luas Tanah', 'number'], ['land_owner', 'Nama Pemilik Tanah', 'text'], ['north_border', 'Batas Utara', 'text'], ['east_border', 'Batas Timur', 'text'], ['south_border', 'Batas Selatan', 'text'], ['west_border', 'Batas Barat', 'text'], ['land_assessment_price', 'Harga Taksiran Tanah', 'text'], ['building_assessment_price', 'Harga Taksiran Bangunan', 'text'], ['total_assessment_price', 'Jumlah Taksiran', 'text']] as $field)
             <div class="mb-4">
                 <label for="{{ $field[0] }}"
                     class="block text-sm font-medium text-gray-700">{{ $field[1] }}</label>
-                @if ($field[2] === 'textarea')
-                    <textarea id="{{ $field[0] }}" wire:model="{{ $field[0] }}"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+
+                @if ($field[0] === 'total_assessment_price')
+                    <!-- Input readonly untuk 'total_assessment_price' -->
+                    <input type="{{ $field[2] }}" id="{{ $field[0] }}"
+                        wire:model.live.debounce.5ms="{{ $field[0] }}"
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        placeholder="Masukkan {{ $field[1] }}" readonly>
                 @else
-                    <input type="{{ $field[2] }}" id="{{ $field[0] }}" wire:model="{{ $field[0] }}"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <!-- Input normal untuk kolom lainnya -->
+                    <input type="{{ $field[2] }}" id="{{ $field[0] }}"
+                        wire:model.live.debounce.5ms="{{ $field[0] }}"
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        placeholder="Masukkan {{ $field[1] }}">
                 @endif
+
                 @error($field[0])
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
         @endforeach
-
-        {{-- Dropdown untuk Gender
-        <div class="mb-4">
-            <label for="gender" class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
-            <select id="gender" wire:model="gender"
-                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                <option value="" disabled selected>Pilih Jenis Kelamin</option>
-                <option value="Laki-Laki" {{ $gender === 'Laki-Laki' ? 'selected' : '' }}>Laki-laki</option>
-                <option value="Perempuan" {{ $gender === 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
-            </select>
-            @error('gender')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-        </div> --}}
 
         <div class="flex justify-end">
             <button type="submit"
@@ -47,3 +41,28 @@
         </div>
     </form>
 </div>
+
+
+<script>
+    document.addEventListener('input', function(e) {
+        if (e.target.matches(
+                '[wire\\:model.lazy="land_assessment_price"], [wire\\:model.lazy="building_assessment_price"], [wire\\:model.lazy="total_assessment_price"]'
+            )) {
+            e.target.value = formatRupiah(e.target.value);
+        }
+    });
+
+    function formatRupiah(value) {
+        let number_string = value.replace(/[^,\d]/g, '').toString();
+        let split = number_string.split(',');
+        let remainder = split[0].length % 3;
+        let rupiah = split[0].substr(0, remainder);
+        let thousand = split[0].substr(remainder).match(/\d{3}/gi);
+        if (thousand) {
+            separator = remainder ? '.' : '';
+            rupiah += separator + thousand.join('.');
+        }
+        rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+        return rupiah ? 'Rp. ' + rupiah : '';
+    }
+</script>
