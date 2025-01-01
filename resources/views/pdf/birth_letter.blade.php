@@ -438,9 +438,9 @@
                     <p class="date" style="margin-bottom: -12px">
                         {{ now()->translatedFormat('j F Y') }}
                     </p>
-                    <p class="signature-title">{{ $birthLetter->reporter_name }}</p>
+                    <p class="signature-title">Pelapor</p>
 
-                    <p class="signature-name">(...........................................)</p>
+                    <p class="signature-name">({{ strtoupper($birthLetter->reporter_name) }})</p>
                 </div>
             </td>
         </tr>
