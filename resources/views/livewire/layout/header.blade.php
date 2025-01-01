@@ -20,21 +20,21 @@ new class extends Component {
         <div>
             <ul class="flex items-center gap-5 max-md:hidden">
                 <li class="font-bold">
-                    <a href="" wire:navigate>Beranda</a>
+                    <a href="">Beranda</a>
                 </li>
                 <li>
-                    <a href="" wire:navigate>Profil</a>
+                    <a href="">Profil</a>
                 </li>
-                <li><a href="" wire:navigate>Potensi Desa</a></li>
-                <li><a href="" wire:navigate>Layanan</a></li>
-                <li><a href="" wire:navigate>Kontak</a></li>
+                <li><a href="">Potensi Desa</a></li>
+                <li><a href="">Layanan</a></li>
+                <li><a href="">Kontak</a></li>
                 @guest
                     <li><a href="{{ route('login') }}" id="loginButton"
-                            class="py-2 px-5 border rounded-md bg-sky-600 text-white transition-all duration-150 ease-in-out"
-                            wire:navigate>Login</a></li>
+                            class="py-2 px-5 border rounded-md bg-sky-600 text-white transition-all duration-150 ease-in-out">Login</a>
+                    </li>
                     <li><a href="{{ route('register') }}" id="registerButton"
-                            class="py-2 px-5 border-2 border-sky-600 rounded-md transition-all duration-150 ease-in-out  bg-white text-sky-600"
-                            wire:navigate>Daftar</a></li>
+                            class="py-2 px-5 border-2 border-sky-600 rounded-md transition-all duration-150 ease-in-out  bg-white text-sky-600">Daftar</a>
+                    </li>
                 @endguest
                 @auth
                     <div>
@@ -55,11 +55,20 @@ new class extends Component {
                             </p>
                         </div>
                         <ul class="py-1" role="none">
-                            <li>
-                                <a href="{{ route('dashboard.request') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Permintaan Surat</a>
-                            </li>
+                            @hasrole('admin')
+                                <li>
+                                    <a href="{{ route('admin.request') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">Dashboard</a>
+                                </li>
+                            @endhasrole
+                            @hasrole('user')
+                                <li>
+                                    <a href="{{ route('dashboard.request') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">Permintaan Surat</a>
+                                </li>
+                            @endhasrole
                             <li>
                                 <a href="" wire:click="logout"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -93,7 +102,12 @@ new class extends Component {
             <a href="{{ route('register') }}" class="border-2 px-4 py-2 rounded-md" wire:navigate>Daftar</a>
         @endguest
         @auth
-            <a href="{{ route('dashboard.request') }}" wire:navigate>Permintaan Surat</a>
+            @hasrole('admin')
+                <a href="{{ route('admin.request') }}" wire:navigate>Dashboard</a>
+            @endhasrole
+            @hasrole('user')
+                <a href="{{ route('dashboard.request') }}" wire:navigate>Permintaan Surat</a>
+            @endhasrole
             <a href="" wire:click="logout" onclick="event.preventDefault()">Logout</a>
         @endauth
     </div>

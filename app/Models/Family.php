@@ -9,6 +9,7 @@ class Family extends Model
 {
     use HasFactory;
 
+    protected $table = 'families';
     protected $fillable = [
         'nik',
         'name',
@@ -22,6 +23,6 @@ class Family extends Model
      */
     public function movingComesInOneVillage()
     {
-        return $this->hasOne(MovingComesInOneVillage::class);  // Satu keluarga hanya bisa memiliki satu surat pindah datang satu desa
+        return $this->belongsTo(MovingComesInOneVillage::class, 'request_id');  // Satu keluarga hanya bisa memiliki satu surat pindah datang satu desa
     }
 }

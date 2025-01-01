@@ -23,7 +23,8 @@ return new class extends Migration
             $table->text('address');
             $table->string('parent_name');
             $table->string('parent_nik');
-            $table->enum('parent_gender', ['Laki-Laki', 'Perempua']);
+            $table->decimal('average_income', 50, 2);
+            $table->enum('parent_gender', ['Laki-Laki', 'Perempuan']);
             $table->string('parent_birth_place');
             $table->string('parent_nationality');
             $table->string('parent_religion');

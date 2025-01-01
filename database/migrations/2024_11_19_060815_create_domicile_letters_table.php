@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('nik');
             $table->enum('gender', ['Laki-Laki', 'Perempuan']);
+            $table->string('birth_place');
             $table->date('birth_date');
             $table->string('nationality');
             $table->string('religion');

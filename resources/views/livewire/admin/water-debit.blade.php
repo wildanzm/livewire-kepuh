@@ -12,8 +12,55 @@
                         {{-- <canvas id="flowRateChart" width="800" height="400">
                         </canvas> --}}
                         <div>
+
                             <iframe src="https://api.kepuh.co.id/flow.php" class="w-[63rem] h-[40rem] max-xl:w-[40rem]"></iframe>
                             <iframe src="https://api.kepuh.co.id/rssi.php" class="w-full h-[40rem]"></iframe>
+
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- Rekapan End -->
+                <!-- Card Footer -->
+                <div
+                    class="flex items-center justify-between pt-3 mt-4 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
+                    <div>
+                        <button
+                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                            type="button" data-dropdown-toggle="sales-rekap-dropdown">
+                            Rekap Perhari
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                            id="sales-rekap-dropdown">
+                            <div class="px-4 py-3" role="none">
+                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white" role="none">
+                                    Pilih Periode Rekap
+                                </p>
+                            </div>
+                            <ul class="py-1" role="none">
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">Rekap Per Hari</a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">Rekap Per Minggu</a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">Rekap Per Bulan</a>
+                                </li>
+                            </ul>
+
                         </div>
                     </div>
                 </div>
@@ -111,6 +158,7 @@
                         class="form-select rounded-lg border-gray-300"
                         onchange="filterPeriod(this.value)"
                     >
+
                         <option value="daily">Harian</option>
                         <option value="monthly">Bulanan</option>
                         <option value="yearly">Tahunan</option>
@@ -138,7 +186,7 @@
                         <a href="#" class="text-sm text-blue-500 hover:underline">Detail Rekap</a>
                     </div>
                 </div>
-        
+
                 <!-- Card Harian 2 -->
                 <div data-period="daily" class="rekap-card bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
                     <div class="flex justify-between items-center mb-3">

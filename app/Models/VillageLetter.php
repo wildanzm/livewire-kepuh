@@ -20,6 +20,10 @@ class VillageLetter extends Model
         'east_border',
         'south_border',
         'west_border',
+        'letter_c_number', // Kolom untuk "Letter C No ..."
+        'land_assessment_price', // Kolom untuk harga taksiran tanah
+        'building_assessment_price', // Kolom untuk harga taksiran bangunan
+        'total_assessment_price', // Kolom untuk jumlah total
     ];
 
     public function request(): BelongsTo

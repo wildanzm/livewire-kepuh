@@ -75,4 +75,8 @@ class Request extends Model
     {
         return $this->hasOne(DifferentNameLetter::class);
     }
+    public function movingComesInOneVillageLetter()
+    {
+        return $this->hasOne(MovingComesInOneVillage::class, 'request_id', 'id');
+    }
 }
