@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('request_id')->constrained();
             $table->string('number_letter')->nullable();
             $table->string('name');
+            $table->enum('gender', ['Laki-Laki', 'Perempuan']);
             $table->string('nik');
             $table->string('birth_place');
             $table->date('birth_date');

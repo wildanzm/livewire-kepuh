@@ -69,9 +69,9 @@ new class extends Component {}; ?>
                         Desa</a>
                 </li>
                 <li>
-                    <a href=""
+                    <a href=" {{ route('admin.single-status-letter') }}   "
                         class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
-                        Keterangan Tidak Mampu</a>
+                        Keterangan Belum Menikah</a>
                 </li>
                 <li>
                     <a href="{{ route('admin.income-letter') }}"
@@ -79,9 +79,9 @@ new class extends Component {}; ?>
                         Pendapatan</a>
                 </li>
                 <li>
-                    <a href=""
+                    <a href=" {{ route('admin.marital-status-letter') }}"
                         class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Surat
-                        Keterangan Belum Menikah</a>
+                        Keterangan Janda/Duda</a>
                 </li>
                 <li>
                     <a href=""

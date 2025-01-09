@@ -2,20 +2,22 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\BirthLetter;
-use App\Models\BusinessLetter;
 use App\Models\Family;
-use App\Models\IncomeLetter;
+use App\Models\MaritalStatusLetter;
 use App\Models\Request;
-use App\Models\VillageLetter;
 use Livewire\Component;
 use App\Models\TypeLetter;
+use App\Models\BirthLetter;
+use App\Models\IncomeLetter;
 use App\Models\PovertyLetter;
+use App\Models\VillageLetter;
 use Livewire\WithFileUploads;
+use App\Models\BusinessLetter;
 use App\Models\DomicileLetter;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use WireUi\Traits\WireUiActions;
+use App\Models\SingleStatusLetter;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MovingComesInOneVillage;
 
@@ -372,6 +374,34 @@ class AdminRequestComponent extends Component
                     ['name' => 'parent_address', 'type' => 'textarea', 'label' => 'Alamat Orang Tua', 'placeholder' => 'Masukkan alamat orang tua'],
                 ];
                 break;
+            case 8: // domicille Letter
+                $this->formFields = [
+                    ['name' => 'name', 'type' => 'text', 'label' => 'Nama', 'placeholder' => 'Masukkan nama'],
+                    ['name' => 'nik', 'type' => 'number', 'label' => 'NIK', 'placeholder' => 'Masukkan NIK'],
+                    ['name' => 'gender', 'type' => 'select', 'label' => 'Jenis Kelamin', 'options' => ['Laki-laki', 'Perempuan']],
+                    ['name' => 'birth_place', 'type' => 'text', 'label' => 'Tempat Lahir', 'placeholder' => 'Masukkan tempat lahir'],
+                    ['name' => 'birth_date', 'type' => 'date', 'label' => 'Tanggal Lahir', 'placeholder' => 'Pilih tanggal lahir'],
+                    ['name' => 'religion', 'type' => 'text', 'label' => 'Agama', 'placeholder' => 'Masukkan agama'],
+                    ['name' => 'occupation', 'type' => 'text', 'label' => 'Pekerjaan', 'placeholder' => 'Masukkan pekerjaan'],
+                    ['name' => 'address', 'type' => 'textarea', 'label' => 'Alamat', 'placeholder' => 'Masukkan alamat'],
+                ];
+
+                break;
+            case 9: // domicille Letter
+                $this->formFields = [
+                    ['name' => 'name', 'type' => 'text', 'label' => 'Nama', 'placeholder' => 'Masukkan nama'],
+                    ['name' => 'birth_place', 'type' => 'text', 'label' => 'Tempat Lahir', 'placeholder' => 'Masukkan tempat lahir'],
+                    ['name' => 'birth_date', 'type' => 'date', 'label' => 'Tanggal Lahir', 'placeholder' => 'Pilih tanggal lahir'],
+                    ['name' => 'religion', 'type' => 'text', 'label' => 'Agama', 'placeholder' => 'Masukkan agama'],
+                    ['name' => 'occupation', 'type' => 'text', 'label' => 'Pekerjaan', 'placeholder' => 'Masukkan pekerjaan'],
+                    ['name' => 'gender', 'type' => 'select', 'label' => 'Jenis Kelamin', 'options' => ['Laki-laki', 'Perempuan']],
+                    ['name' => 'address', 'type' => 'textarea', 'label' => 'Alamat', 'placeholder' => 'Masukkan alamat'],
+                    ['name' => 'marital_status', 'type' => 'select', 'label' => 'Status Perkawinan', 'options' => ['Duda', 'Janda']],
+                    ['name' => 'status_reason', 'type' => 'select', 'label' => 'Alasan Status', 'options' => ['Perceraian', 'Kematian']],
+                ];
+
+
+                break;
 
             default:
                 $this->formFields = [];
@@ -470,7 +500,15 @@ class AdminRequestComponent extends Component
 
             // Simpan data ke tabel income_letters
             IncomeLetter::create($data);
+        } elseif ($this->type_letter_id == 8) {
+            SingleStatusLetter::create($data);
+        } elseif ($this->type_letter_id == 9) {
+            MaritalStatusLetter::create($data);
         }
+
+
+
+
 
         $this->reset();
         $this->dialog()->show([
@@ -502,7 +540,7 @@ class AdminRequestComponent extends Component
     public function render()
     {
         return view('livewire.admin.admin-request-component', [
-            'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3, 4, 5, 6, 7])->get(),
+            'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3, 4, 5, 6, 7, 8, 9])->get(),
         ]);
     }
 }

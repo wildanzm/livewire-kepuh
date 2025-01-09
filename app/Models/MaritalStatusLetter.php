@@ -17,7 +17,8 @@ class MaritalStatusLetter extends Model
         'occupation',
         'gender',
         'address',
-        'marital_status'
+        'marital_status',
+        'status_reason'
     ];
 
     public function request(): BelongsTo

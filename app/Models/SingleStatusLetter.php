@@ -11,6 +11,7 @@ class SingleStatusLetter extends Model
         'request_id',
         'number_letter',
         'name',
+        'gender',
         'nik',
         'birth_place',
         'birth_date',

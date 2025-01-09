@@ -22,7 +22,7 @@ class TypeLetterSeeder extends Seeder
             ['name' => 'Surat Desa'],
             ['name' => 'Surat Pendapatan'],
             ['name' => 'Surat Keterangan Belum Menikah'],
-            ['name' => 'Surat Pernikahan'],
+            ['name' => 'Surat Keterangan Janda/Duda'],
 
         ];
 
