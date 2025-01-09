@@ -52,7 +52,7 @@ class SingleStatusLetter extends Component
     {
         // composer require barryvdh/laravel-dompdf
         // Retrieve data for the document
-        $singleStatusLetter = SingleStatusLetter::findOrFail($id);
+        $singleStatusLetter = \App\Models\SingleStatusLetter::findOrFail($id);
 
         // Generate HTML content
         $htmlContent = view('pdf.single_status_letter', compact('singleStatusLetter'))->render();

@@ -42,6 +42,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/business-letter/{id}/download', [BusinessLetter::class, 'downloadPDF'])->name('business-letter.download');
     Route::get('/birth-letter/{id}/download', [BirthLetter::class, 'downloadPDF'])->name('birth-letter.download');
     Route::get('/income-letter/{id}/download', [IncomeLetter::class, 'downloadPDF'])->name('income-letter.download');
+    Route::get('/single-status-letter/{id}/download', [SingleStatusLetter::class, 'downloadPDF'])->name('single-status-letter.download');
+    Route::get('/marital-status-letter/{id}/download', [MaritalStatusLetter::class, 'downloadPDF'])->name('marital-status-letter.download');
 
 
     Route::get('/birth-letter/{id}/preview', [BirthLetter::class, 'streamPDF'])->name('birth-letter.streamPDF');

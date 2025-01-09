@@ -96,7 +96,7 @@
                                         <td class="p-4 space-x-2 whitespace-nowrap">
                                             <div class="flex flex-col gap-3">
                                                 @if ($request->singleStatusLetter)
-                                                    <a href=""
+                                                    <a href="  {{ route('admin.single-status-letter.download', $request->singleStatusLetter->id) }}"
                                                         class="flex flex-column items-center justify-center  py-2 px-2 text-sm font-medium text-white bg-amber-700 rounded-lg hover:bg-amber-800 focus:ring-4 focus:ring-amber-300 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800 ease-in-out duration-300">
                                                         <span class="mr-2">Download</span>
                                                         <x-grommet-document-download class="w-5 " />
