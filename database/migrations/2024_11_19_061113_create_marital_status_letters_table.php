@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('occupation');
             $table->enum('gender', ['Laki-Laki', 'Perempuan']);
             $table->text('address');
-            $table->enum('marital_status', ['Kawin', 'Belum Kawin']);
+            $table->enum('marital_status', ['Duda', 'Janda']);
+            $table->enum('status_reason', ['Perceraian', 'Kematian']);
             $table->timestamps();
         });
     }

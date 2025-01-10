@@ -7,6 +7,7 @@ use App\Models\Request;
 use Livewire\Component;
 use App\Models\TypeLetter;
 use App\Models\BirthLetter;
+use App\Models\IncomeLetter;
 use App\Models\PovertyLetter;
 use App\Models\VillageLetter;
 use Livewire\WithFileUploads;
@@ -15,6 +16,8 @@ use App\Models\DomicileLetter;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use WireUi\Traits\WireUiActions;
+use App\Models\SingleStatusLetter;
+use App\Models\MaritalStatusLetter;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MovingComesInOneVillage;
 
@@ -66,16 +69,15 @@ class UserRequestComponent extends Component
         ],
     ];
 
-
     #[Layout('layouts.app')]
-    #[Title('Ajukan Permintaan Surat | Desa Kepuh')]
+    #[Title('Ajukan Permintaan Surat')]
 
     public function mount()
     {
         $this->isFormVisible = false;
         $this->formFields = []; // Awalnya kosong
         $this->familyMemberFields = [
-            ['name' => 'nik', 'type' => 'text', 'label' => 'NIK', 'placeholder' => 'Masukkan NIK'],
+            ['name' => 'nik', 'type' => 'number', 'label' => 'NIK', 'placeholder' => 'Masukkan NIK'],
             ['name' => 'name', 'type' => 'text', 'label' => 'Nama', 'placeholder' => 'Masukkan nama'],
             ['name' => 'ktp_expiry', 'type' => 'date', 'label' => 'Tanggal Kadaluarsa KTP', 'placeholder' => ''],
             ['name' => 'shdk', 'type' => 'text', 'label' => 'Status Hubungan Keluarga', 'placeholder' => 'Masukkan status hubungan keluarga'],
@@ -144,6 +146,7 @@ class UserRequestComponent extends Component
         // Menampilkan form tambahan jika type_letter_id diisi
         $this->isFormVisible = !empty($this->type_letter_id);
     }
+
 
     public function getSelectedTypeNameProperty()
     {
@@ -330,22 +333,26 @@ class UserRequestComponent extends Component
                     ['name' => 'witness2_address', 'type' => 'textarea', 'label' => 'Alamat Saksi 2', 'placeholder' => 'Masukkan Alamat Saksi 2'],
                 ];
                 break;
-            case 6: // Village Letter
-                $this->formFields =
-                    [
-                        ['name' => 'sppt_number', 'type' => 'text', 'label' => 'Nomor SPPT', 'placeholder' => 'Masukkan nomor SPPT'],
-                        ['name' => 'persil_number', 'type' => 'text', 'label' => 'Nomor Persil', 'placeholder' => 'Masukkan nomor persil'],
-                        ['name' => 'kohir_number', 'type' => 'text', 'label' => 'Nomor Kohir', 'placeholder' => 'Masukkan nomor kohir'],
-                        ['name' => 'class', 'type' => 'text', 'label' => 'Kelas', 'placeholder' => 'Masukkan kelas'],
-                        ['name' => 'land_area', 'type' => 'number', 'label' => 'Luas Tanah (m²)', 'placeholder' => 'Masukkan luas tanah'],
-                        ['name' => 'land_owner', 'type' => 'text', 'label' => 'Pemilik Tanah', 'placeholder' => 'Masukkan nama pemilik tanah'],
-                        ['name' => 'north_border', 'type' => 'text', 'label' => 'Batas Utara', 'placeholder' => 'Masukkan batas utara'],
-                        ['name' => 'east_border', 'type' => 'text', 'label' => 'Batas Timur', 'placeholder' => 'Masukkan batas timur'],
-                        ['name' => 'south_border', 'type' => 'text', 'label' => 'Batas Selatan', 'placeholder' => 'Masukkan batas selatan'],
-                        ['name' => 'west_border', 'type' => 'text', 'label' => 'Batas Barat', 'placeholder' => 'Masukkan batas barat'],
-                    ];
+            
+            case 6: // domicille Letter
+                $this->formFields = [
+                    ['name' => 'sppt_number', 'type' => 'text', 'label' => 'Nomor SPPT', 'placeholder' => 'Masukkan nomor SPPT'],
+                    ['name' => 'persil_number', 'type' => 'text', 'label' => 'Nomor Persil', 'placeholder' => 'Masukkan nomor persil'],
+                    ['name' => 'kohir_number', 'type' => 'text', 'label' => 'Nomor Kohir', 'placeholder' => 'Masukkan nomor kohir'],
+                    ['name' => 'class', 'type' => 'text', 'label' => 'Kelas', 'placeholder' => 'Masukkan kelas'],
+                    ['name' => 'land_area', 'type' => 'number', 'label' => 'Luas Tanah (m²)', 'placeholder' => 'Masukkan luas tanah'],
+                    ['name' => 'land_owner', 'type' => 'text', 'label' => 'Pemilik Tanah', 'placeholder' => 'Masukkan nama pemilik tanah'],
+                    ['name' => 'north_border', 'type' => 'text', 'label' => 'Batas Utara', 'placeholder' => 'Masukkan batas utara'],
+                    ['name' => 'east_border', 'type' => 'text', 'label' => 'Batas Timur', 'placeholder' => 'Masukkan batas timur'],
+                    ['name' => 'south_border', 'type' => 'text', 'label' => 'Batas Selatan', 'placeholder' => 'Masukkan batas selatan'],
+                    ['name' => 'west_border', 'type' => 'text', 'label' => 'Batas Barat', 'placeholder' => 'Masukkan batas barat'],
+
+                    // Menambahkan field baru untuk Letter C dan harga taksiran
+                    ['name' => 'letter_c_number', 'type' => 'text', 'label' => 'Letter C No', 'placeholder' => 'Masukkan nomor Letter C'],
+
+                ];
                 break;
-            case 7: // Income Letter
+            case 7: // domicille Letter
                 $this->formFields = [
                     ['name' => 'name', 'type' => 'text', 'label' => 'Nama', 'placeholder' => 'Masukkan nama'],
                     ['name' => 'nik', 'type' => 'number', 'label' => 'NIK', 'placeholder' => 'Masukkan NIK'],
@@ -363,11 +370,42 @@ class UserRequestComponent extends Component
                     ['name' => 'parent_address', 'type' => 'textarea', 'label' => 'Alamat Orang Tua', 'placeholder' => 'Masukkan alamat orang tua'],
                 ];
                 break;
+            case 8: // domicille Letter
+                $this->formFields = [
+                    ['name' => 'name', 'type' => 'text', 'label' => 'Nama', 'placeholder' => 'Masukkan nama'],
+                    ['name' => 'nik', 'type' => 'number', 'label' => 'NIK', 'placeholder' => 'Masukkan NIK'],
+                    ['name' => 'gender', 'type' => 'select', 'label' => 'Jenis Kelamin', 'options' => ['Laki-laki', 'Perempuan']],
+                    ['name' => 'birth_place', 'type' => 'text', 'label' => 'Tempat Lahir', 'placeholder' => 'Masukkan tempat lahir'],
+                    ['name' => 'birth_date', 'type' => 'date', 'label' => 'Tanggal Lahir', 'placeholder' => 'Pilih tanggal lahir'],
+                    ['name' => 'religion', 'type' => 'text', 'label' => 'Agama', 'placeholder' => 'Masukkan agama'],
+                    ['name' => 'occupation', 'type' => 'text', 'label' => 'Pekerjaan', 'placeholder' => 'Masukkan pekerjaan'],
+                    ['name' => 'address', 'type' => 'textarea', 'label' => 'Alamat', 'placeholder' => 'Masukkan alamat'],
+                ];
+
+                break;
+            case 9: // domicille Letter
+                $this->formFields = [
+                    ['name' => 'name', 'type' => 'text', 'label' => 'Nama', 'placeholder' => 'Masukkan nama'],
+                    ['name' => 'birth_place', 'type' => 'text', 'label' => 'Tempat Lahir', 'placeholder' => 'Masukkan tempat lahir'],
+                    ['name' => 'birth_date', 'type' => 'date', 'label' => 'Tanggal Lahir', 'placeholder' => 'Pilih tanggal lahir'],
+                    ['name' => 'religion', 'type' => 'text', 'label' => 'Agama', 'placeholder' => 'Masukkan agama'],
+                    ['name' => 'occupation', 'type' => 'text', 'label' => 'Pekerjaan', 'placeholder' => 'Masukkan pekerjaan'],
+                    ['name' => 'gender', 'type' => 'select', 'label' => 'Jenis Kelamin', 'options' => ['Laki-laki', 'Perempuan']],
+                    ['name' => 'address', 'type' => 'textarea', 'label' => 'Alamat', 'placeholder' => 'Masukkan alamat'],
+                    ['name' => 'marital_status', 'type' => 'select', 'label' => 'Status Perkawinan', 'options' => ['Duda', 'Janda']],
+                    ['name' => 'status_reason', 'type' => 'select', 'label' => 'Alasan Status', 'options' => ['Perceraian', 'Kematian']],
+                ];
+
+
+                break;
+            
             default:
                 $this->formFields = [];
                 break;
         }
     }
+
+
 
     public function submit()
     {
@@ -435,8 +473,37 @@ class UserRequestComponent extends Component
         } elseif ($this->type_letter_id == 5) {
             BirthLetter::create($data);
         } elseif ($this->type_letter_id == 6) {
+            // Bersihkan format IDR sebelum menyimpan ke database
+            $data['land_assessment_price'] = $this->cleanCurrency($this->formFieldsValues['assessment_land_assessment_price'] ?? 0);
+            $data['building_assessment_price'] = $this->cleanCurrency($this->formFieldsValues['assessment_building_assessment_price'] ?? 0);
+            $data['total_assessment_price'] = $this->cleanCurrency($this->formFieldsValues['assessment_total_assessment_price'] ?? 0);
+
+            // Simpan data ke tabel VillageLetter
             VillageLetter::create($data);
+        } elseif ($this->type_letter_id == 7) {
+            // Debugging: Periksa nilai average_income sebelum diproses
+
+
+
+            // Remove thousands separator (dots) but leave the decimal point
+            $averageIncome = isset($data['average_income']) && $data['average_income'] !== ''
+                ? preg_replace('/\.(?=\d{3})/', '', $data['average_income']) // Removes only dots used as thousand separators
+                : null;  // If empty, set to null (not 0)
+
+
+            // Pastikan data average_income adalah angka desimal jika ada nilai
+            $data['average_income'] = is_numeric($averageIncome) ? (float)$averageIncome : null;
+
+            // Simpan data ke tabel income_letters
+            IncomeLetter::create($data);
+        } elseif ($this->type_letter_id == 8) {
+            SingleStatusLetter::create($data);
+        } elseif ($this->type_letter_id == 9) {
+            MaritalStatusLetter::create($data);
         }
+
+
+
 
         $this->reset();
         $this->dialog()->show([
@@ -468,7 +535,9 @@ class UserRequestComponent extends Component
     public function render()
     {
         return view('livewire.admin.admin-request-component', [
-            'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3, 4, 5, 6, 7])->get(),
+
+            'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3, 4, 5, 6, 7, 8])->get(),
+
         ]);
     }
 }
