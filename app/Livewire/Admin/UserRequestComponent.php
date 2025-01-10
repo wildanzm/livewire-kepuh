@@ -154,9 +154,6 @@ class UserRequestComponent extends Component
         return $selectedType ? $selectedType['name'] : null;
     }
 
-
-
-
     public function updated($propertyName)
     {
         // Kalkulasi total jika salah satu field diubah
@@ -184,8 +181,6 @@ class UserRequestComponent extends Component
     {
         return (float) str_replace(['.', ','], ['', '.'], $value); // Hapus titik dan ubah koma menjadi titik desimal
     }
-
-
 
     public function loadFormFields()
     {
@@ -338,6 +333,7 @@ class UserRequestComponent extends Component
                     ['name' => 'witness2_address', 'type' => 'textarea', 'label' => 'Alamat Saksi 2', 'placeholder' => 'Masukkan Alamat Saksi 2'],
                 ];
                 break;
+            
             case 6: // domicille Letter
                 $this->formFields = [
                     ['name' => 'sppt_number', 'type' => 'text', 'label' => 'Nomor SPPT', 'placeholder' => 'Masukkan nomor SPPT'],
@@ -402,7 +398,7 @@ class UserRequestComponent extends Component
 
 
                 break;
-
+            
             default:
                 $this->formFields = [];
                 break;
@@ -539,7 +535,9 @@ class UserRequestComponent extends Component
     public function render()
     {
         return view('livewire.admin.admin-request-component', [
+
             'typeLetters' => TypeLetter::whereIn('id', [1, 2, 3, 4, 5, 6, 7, 8])->get(),
+
         ]);
     }
 }

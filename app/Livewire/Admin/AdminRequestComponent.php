@@ -261,7 +261,7 @@ class AdminRequestComponent extends Component
                         ['name' => 'address', 'type' => 'textarea', 'label' => 'Alamat', 'placeholder' => 'Masukkan alamat lengkap'],
                     ];
                 break;
-            case 4: // domicille Letter
+            case 4: // bussiness Letter
                 $this->formFields =
                     [
                         ['name' => 'nik', 'type' => 'number', 'label' => 'NIK', 'placeholder' => 'Masukkan NIK'],
@@ -278,7 +278,7 @@ class AdminRequestComponent extends Component
                         ['name' => 'business_address', 'type' => 'textarea', 'label' => 'Alamat Usaha', 'placeholder' => 'Masukkan alamat usaha'],
                     ];
                 break;
-            case 5: // domicille Letter
+            case 5: // birth Letter
                 $this->formFields = [
                     ['name' => 'family_head_name', 'type' => 'text', 'label' => 'Nama Kepala Keluarga', 'placeholder' => 'Masukkan Nama Kepala Keluarga'],
                     ['name' => 'family_card_number', 'type' => 'number', 'label' => 'Nomor KK', 'placeholder' => 'Masukkan Nomor KK'],
@@ -338,7 +338,7 @@ class AdminRequestComponent extends Component
                     ['name' => 'witness2_address', 'type' => 'textarea', 'label' => 'Alamat Saksi 2', 'placeholder' => 'Masukkan Alamat Saksi 2'],
                 ];
                 break;
-            case 6: // domicille Letter
+            case 6: // Village Letter
                 $this->formFields = [
                     ['name' => 'sppt_number', 'type' => 'text', 'label' => 'Nomor SPPT', 'placeholder' => 'Masukkan nomor SPPT'],
                     ['name' => 'persil_number', 'type' => 'text', 'label' => 'Nomor Persil', 'placeholder' => 'Masukkan nomor persil'],
@@ -356,7 +356,7 @@ class AdminRequestComponent extends Component
 
                 ];
                 break;
-            case 7: // domicille Letter
+            case 7: // Income Letter
                 $this->formFields = [
                     ['name' => 'name', 'type' => 'text', 'label' => 'Nama', 'placeholder' => 'Masukkan nama'],
                     ['name' => 'nik', 'type' => 'number', 'label' => 'NIK', 'placeholder' => 'Masukkan NIK'],
